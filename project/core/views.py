@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from project.cart import cart
 from django.http import HttpResponseRedirect
+from project import settings
 
 # Page = {}
 
@@ -27,6 +28,7 @@ def add_to_cart(request):
 
 
 def indexView(request, template_name='core/index.html'):
+    dir_test = settings
 
     products = Product.objects.all()
 
