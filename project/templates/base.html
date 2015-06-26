@@ -1,0 +1,140 @@
+{% load static from staticfiles %}
+{% load header_tags %}
+{% load mptt_tags %}
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <meta name="author"  content="Kamleshyadav"/>
+        <meta name="MobileOptimized" content="320">
+        <!-- main css -->
+        <link rel="stylesheet" href="{% static "kastoreum/css/style.css" %}" media="screen"/>
+        <link rel="stylesheet" href="{% static "kastoreum/css/bootstrap.css" %}" media="screen"/>
+{#        material#}
+        <link rel="stylesheet" href="{% static "kastoreum/material/dist/css/material.css" %}" media="screen"/>
+        <link rel="stylesheet" href="{% static "kastoreum/material/dist/css/ripples.css" %}" media="screen"/>
+
+        <link rel="stylesheet" href="{% static "kastoreum/css/font-awesome.css" %}" media="screen"/>
+        <link rel="stylesheet" href="{% static "kastoreum/css/animate.css" %}" media="screen"/>
+        <link rel="stylesheet" href="{% static "kastoreum/css/swiper.min.css" %}" media="screen"/>
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400italic,400,700,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        {% block head %}
+            <title>{{ title }}</title>
+            <meta name="description"  content="{{ description }}"/>
+            <meta name="keywords" content="">
+        {% endblock %}
+        {% block page_css %}
+            <link rel="stylesheet" href="{% static "kastoreum/js/plugin/revslider/css/settings.css" %}" media="screen"/>
+            <link rel="stylesheet" href="{% static "kastoreum/js/plugin/owl-carousel/owl.carousel.css" %}" media="screen"/>
+            <link rel="stylesheet" href="{% static "kastoreum/js/plugin/owl-carousel/owl.theme.css" %}" media="screen"/>
+            <link rel="stylesheet" href="{% static "kastoreum/js/plugin/mediaelement/mediaelementplayer.css" %}" media="screen"/>
+            <link rel="stylesheet" href="{% static "kastoreum/js/plugin/prettyphoto/css/prettyPhoto.css" %}" media="screen"/>
+        {% endblock %}
+    </head>
+        <body>
+
+            <div class="container">
+                <div class="row">
+
+                    {% block header %}
+                        {% top_menu request %}
+                    {% endblock %}
+
+                    <div class="col-xs-3 sidebar">
+                        <h2>Список Категорий</h2>
+                        <ul>
+                            {% category request %}
+                        </ul>
+                    </div>
+                    <div class="col-xs-9">
+                        <div class="row">
+                            {% block content %}
+                            {% endblock %}
+                        </div>
+                    </div>
+
+                    {% block articles %}
+                    {% endblock %}
+
+                    <div class="col-xs-12">
+                        <div class="row">
+                            {% block footer %}
+                                <div class="col-xs-4">
+                                    Это текст футера
+
+                                </div>
+                                <div class="col-xs-3">
+                                    <h4>Способы оплаты</h4>
+                                    <img src="{% static "kastoreum/images/payment.png.jpeg" %}" alt=""/>
+                                </div>
+                                <div class="col-xs-2">
+                                    <h4>Контакты</h4>
+                                    <img src="{% static "kastoreum/images/payment.png.jpeg"%}" width="180" alt=""/>
+                                </div>
+                                <div class="col-xs-3">
+                                    <h4>Способы доставки</h4>
+                                    <img src="{% static "kastoreum/images/ship.png.jpeg" %}" alt=""/>
+                                </div>
+                            {% endblock  %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        <script type="text/javascript" src="{% static "kastoreum/js/jquery-1.11.1.js" %}"></script>
+        <script type="text/javascript" src="{% static "kastoreum/js/jquery-validation-1/dist/jquery.validate.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "kastoreum/js/jquery-validation-1/dist/localization/messages_ru.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "kastoreum/js/bootstrap.js" %}"></script>
+{#            material#}
+            <script type="text/javascript" src="{% static "kastoreum/material/dist/js/material.js" %}"></script>
+            <script type="text/javascript" src="{% static "kastoreum/material/dist/js/ripples.js" %}"></script>
+            <script>$('.dropdown-toggle').dropdown();</script>
+            <script>$.material.init()</script>
+
+        {% block page_js %}
+{#            <script type="text/javascript" src="{% static "kastoreum/js/plugin/appear/jquery.appear.js" %}"></script>#}
+{#            <script type="text/javascript" src="{% static "kastoreum/js/plugin/count/jquery.countTo.js" %}"></script>#}
+{#            <script type="text/javascript" src="{% static "kastoreum/js/plugin/mediaelement/mediaelement-and-player.js" %}"></script>#}
+{#            <script type="text/javascript" src="{% static "kastoreum/js/plugin/mixitup/jquery.mixitup.js" %}"></script>#}
+{#            <script type="text/javascript" src="{% static "kastoreum/js/plugin/modernizr/modernizr.custom.js" %}"></script>#}
+{#            <script type="text/javascript" src="{% static "kastoreum/js/plugin/owl-carousel/owl.carousel.js" %}"></script>#}
+{#            <script type="text/javascript" src="{% static "kastoreum/js/plugin/parallax/jquery.stellar.js" %}"></script>#}
+{#            <script type="text/javascript" src="{% static "kastoreum/js/plugin/prettyphoto/js/jquery.prettyPhoto.js" %}"></script>#}
+{#            <script type="text/javascript" src="{% static "kastoreum/js/plugin/revslider/js/jquery.themepunch.plugins.min.js" %}"></script>#}
+{#            <script type="text/javascript" src="{% static "kastoreum/js/plugin/revslider/js/jquery.themepunch.revolution.js" %}"></script>#}
+{#            <script type="text/javascript" src="{% static "kastoreum/js/plugin/single/single.js" %}"></script>#}
+{#            <script type="text/javascript" src="{% static "kastoreum/js/plugin/wow/wow.js" %}"></script>#}
+{#            <script type="text/javascript" src="{% static "kastoreum/js/grid-gallery.js" %}"></script>#}
+{#            <script type="text/javascript" src="{% static "kastoreum/js/custom.js" %}"></script>#}
+{#            <script  type="text/javascript" src="{% static "kastoreum/js/swiper.min.js" %}"></script>#}
+
+
+{#                <script>#}
+{#                    var swiper = new Swiper('.swiper-container', {#}
+{#                        pagination: '.swiper-pagination',#}
+{#                        nextButton: '.swiper-button-next',#}
+{#                        prevButton: '.swiper-button-prev',#}
+{#                        paginationClickable: true,#}
+{#                        spaceBetween: 50,#}
+{#                        centeredSlides: true,#}
+{#                        autoplay: 8500,#}
+{#                        autoplayDisableOnInteraction: false#}
+{#                    });#}
+{#                </script>#}
+        {% endblock %}
+            <script type="text/javascript">
+                (function() {
+                    var script = document.createElement('script');
+                    script.type = 'text/javascript'; script.async = true;
+                    script.src = '//remonline.ru/static/js/remonline-widget.js';
+                    document.getElementsByTagName('head')[0].appendChild(script);
+                        })();
+            </script>
+
+        </body>
+</html>

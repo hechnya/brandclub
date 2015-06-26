@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from easy_thumbnails.conf import Settings as thumbnail_settings
+
+AUTH_USER_MODEL = 'authentication.Account'
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,11 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'giich(&uwz+%momk638=8!t=1fa+$^7rfipn-(8!&rh2g-d^v='
+SECRET_KEY = '7j09%e0uap(m5o=3967!k7$vp*kvg7-vr8jmslft_53g$5i@%+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+ADMIN_EMAIL = 'hechnya@mail.ru'
 ALLOWED_HOSTS = []
 
 
@@ -37,6 +40,16 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'project.core',
+    'ckeditor',
+    'mptt',
+    'mptt_tree_editor',
+    'sitetree',
+    'image_cropping',
+    'easy_thumbnails',
+    'project.cart',
+    'authentication',
+    'robokassa',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -55,20 +68,29 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'project/templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'django.core.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'project.wsgi.application'
+# TEMPLATE_LOADERS = (
+#     'django.template.loaders.filesystem.Loader',
+#     'django.template.loaders.app_directories.Loader',
+#     'django.template.loaders.eggs.Loader',
+# )
+
+# WSGI_APPLICATION = 'project.wsgi.application'
 
 
 # Database
@@ -76,10 +98,21 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # Internationalization
@@ -100,3 +133,32 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = ''
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, "static"),
+# )
+MEDIA_ROOT = '%s/project/media' % BASE_DIR
+
+MEDIA_URL = '/media/'
+
+CKEDITOR_UPLOAD_PATH = '/media/uploads'
+
+THUMBNAIL_DEBUG = True
+
+THUMBNAIL_PROCESSORS = (
+    'image_cropping.thumbnail_processors.crop_corners',
+) + thumbnail_settings.THUMBNAIL_PROCESSORS
+
+
+ROBOKASSA_LOGIN = 'kastoreum'
+ROBOKASSA_PASSWORD1 = 'LKJHlkvbsklcbfwe2ye2893'
+ROBOKASSA_PASSWORD2 = 'JJHHFHGD213Ksaf'
+ROBOKASSA_TEST_MODE = True
+
+
+try:
+    from settings_local import *
+except ImportError:
+    pass
+
