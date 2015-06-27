@@ -12,11 +12,12 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from easy_thumbnails.conf import Settings as thumbnail_settings
+# from easy_thumbnails.conf import Settings as thumbnail_settings
 
 AUTH_USER_MODEL = 'authentication.Account'
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_PATH = os.path.abspath(os.path.dirname(__file__).decode('utf-8')).replace('\\', '/')
 
 
 # Quick-start development settings - unsuitable for production
@@ -134,10 +135,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATIC_ROOT = '%s/project/static' % BASE_DIR
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, "static"),
-# )
+STATIC_ROOT = ''
+
 MEDIA_ROOT = '%s/project/media' % BASE_DIR
 
 MEDIA_URL = '/media/'
@@ -146,9 +145,9 @@ CKEDITOR_UPLOAD_PATH = '/media/uploads'
 
 THUMBNAIL_DEBUG = True
 
-THUMBNAIL_PROCESSORS = (
-    'image_cropping.thumbnail_processors.crop_corners',
-) + thumbnail_settings.THUMBNAIL_PROCESSORS
+# THUMBNAIL_PROCESSORS = (
+#     'image_cropping.thumbnail_processors.crop_corners',
+# ) + thumbnail_settings.THUMBNAIL_PROCESSORS
 
 
 ROBOKASSA_LOGIN = 'kastoreum'
