@@ -7,6 +7,8 @@ from django.template import RequestContext
 from project.cart import cart
 from django.http import HttpResponseRedirect
 
+from project.settings import STATIC_ROOT
+
 # Page = {}
 
 def add_to_cart(request):
@@ -29,6 +31,7 @@ def add_to_cart(request):
 def indexView(request, template_name='core/index.html'):
 
     products = Product.objects.all()
+    new_test = STATIC_ROOT
 
     if request.method == 'POST':
         add_to_cart(request)
