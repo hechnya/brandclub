@@ -31,7 +31,7 @@ def add_to_cart(request):
 def indexView(request, template_name='core/index.html'):
 
     products = Product.objects.all()
-    new_test = STATIC_ROOT
+    # new_test = STATIC_ROOT
 
     if request.method == 'POST':
         add_to_cart(request)
