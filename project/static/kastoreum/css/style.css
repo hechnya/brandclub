@@ -42,3 +42,16 @@ input.hidden_style{
 .product .btn i {
     font-size: 18px;
 }
+.nav li.username {
+    margin:15px 0px 0px 0px;
+    font-size: 25px;
+}
+
+.swiper-container {
+    width: 100%;
+    height: 300px;
+}
+.swiper-container .swiper-slide img{
+    width: 100%;
+    height: auto;
+}

@@ -11,13 +11,21 @@ class Category(MPTTModel):
     slug = models.SlugField(max_length=200)
     parent = TreeForeignKey('self', related_name='children', blank=True, null=True)
 
+    meta_title = models.CharField(max_length=60, blank=True)
+    meta_description = models.CharField(max_length=150, blank=True)
+
     class Meta:
         verbose_name = u'Категории'
         verbose_name_plural = u'Категории'
 
+    def url(self):
+        return "/category/"+self.slug+"/"
+
     def __unicode__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return "/category/"+self.slug+"/"
 
 
 class Product(models.Model):
@@ -28,6 +36,9 @@ class Product(models.Model):
     weight = models.IntegerField()
     category = models.ManyToManyField(Category)
 
+    meta_title = models.CharField(max_length=60, blank=True)
+    meta_description = models.CharField(max_length=150, blank=True)
+
     class Meta:
         verbose_name = u'Продукты'
         verbose_name_plural = u'Продукты'
@@ -36,6 +47,9 @@ class Product(models.Model):
         return self.name
 
     def url(self):
+        return '/product/' + self.slug
+
+    def get_absolute_url(self):
         return '/product/' + self.slug
 
     def get_image(self):
@@ -59,6 +73,9 @@ class Article(models.Model):
     text = models.TextField()
     date = models.DateField(auto_now_add=True)
 
+    meta_title = models.CharField(max_length=60, blank=True)
+    meta_description = models.CharField(max_length=150, blank=True)
+
     class Meta:
         verbose_name = u'Статья'
         verbose_name_plural = u'Статьи'
@@ -66,7 +83,8 @@ class Article(models.Model):
     def __unicode__(self):
         return self.name
 
-
+    def get_absolute_url(self):
+        return '/article/%s/' % self.id
 
 
 class ArticleImage(models.Model):
@@ -78,7 +96,7 @@ class ArticleImage(models.Model):
         verbose_name_plural = u'Фото статьи'
 
     def __unicode__(self):
-        return self.name
+        return self.article.name
 
 
 class Page(models.Model):
@@ -86,12 +104,18 @@ class Page(models.Model):
     name = models.CharField(max_length=2000)
     page = models.TextField()
 
+    meta_title = models.CharField(max_length=60, blank=True)
+    meta_description = models.CharField(max_length=150, blank=True)
+
     class Meta:
         verbose_name = u'Страницы'
         verbose_name_plural = u'Страницы'
 
     def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return '/page/' + self.slug
 
 
 class PageImage(models.Model):
@@ -103,5 +127,15 @@ class PageImage(models.Model):
         verbose_name_plural = u'Фото страницы'
 
     def __unicode__(self):
-        return self.name
+        return self.page.name
 
+
+class Slide(models.Model):
+    image = models.ImageField(upload_to="slides")
+
+    class Meta:
+        verbose_name = u'Фото слайдер'
+        verbose_name_plural = u'Фото слайд'
+
+    def __unicode__(self):
+        return "%s" % self.id

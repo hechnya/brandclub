@@ -1,7 +1,32 @@
 {% extends "base.html" %}
+{% load header_tags %}
 {% load static from staticfiles %}
 
+{% block header %}
+        <!-- Slider main container -->
+    <div class="swiper-container">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            {% for slide in slides %}
+                <div class="swiper-slide"><img src="/media/{{ slide.image }}" alt=""/></div>
+            {% endfor %}
+{#            <div class="swiper-slide"><img src="{% static 'kastoreum/images/peizagh.jpg' %}" alt=""/></div>#}
+
+{#            <div class="swiper-slide"><img src="{% static 'kastoreum/images/peizagh.jpg' %}" alt=""/></div>#}
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+    {% top_menu request %}
+{% endblock %}
+
 {% block content %}
+
 
     {{ STATIC_ROOT }}
 
@@ -11,7 +36,6 @@
 
                     <div class="col-md-4 product">
                         <img style="height:150px;" src="/media/{{ product.get_image.image }}" alt=""/>
-{#                        <p>{{ product.image.image }}</p>#}
                         <h3>{{ product.name }}</h3>
                         <p class="description_product">{{ product.description|truncatewords:12 }}</p>
                         <p> цена : {{ product.price }}  рублей</p>
@@ -27,7 +51,6 @@
 
                         <a class="btn btn-success" href="/product/{{ product.slug }}">подробнее</a>
                     </div>
-
             {% endfor %}
         </div>
     </div>

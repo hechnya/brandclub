@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% load static from staticfiles %}
 
+{% block head %}
+    <title>{{ category.meta_title }} | аптека здоровья kastoreum.ru</title>
+    <meta name="description" content="{{ category.meta_description }}"/>
+{% endblock %}
+
 {% block content %}
 
     <div class="col-md-12">
@@ -21,7 +26,7 @@
                                 <input type="submit" class="hidden_style" value="Добавить" />
                             </div>
                         </form>
-                        <a class="btn btn-success" href="/product/{{ product.slug }}">подробнее</a>
+                        <a class="btn btn-success" href="/product/{{ product.slug }}/">подробнее</a>
                     </div>
 
             {% endfor %}

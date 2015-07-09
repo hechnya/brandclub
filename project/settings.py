@@ -14,6 +14,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 # from easy_thumbnails.conf import Settings as thumbnail_settings
 
+SITE_ID = 2
+
 AUTH_USER_MODEL = 'authentication.Account'
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,6 +43,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'project.core',
     'ckeditor',
     'mptt',
@@ -51,6 +55,8 @@ INSTALLED_APPS = (
     'project.cart',
     'authentication',
     'robokassa',
+    'breadcrumbs',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -62,6 +68,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'breadcrumbs.middleware.BreadcrumbsMiddleware',
 )
 
 ROOT_URLCONF = 'project.urls'

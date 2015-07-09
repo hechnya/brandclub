@@ -1,6 +1,17 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
+from django.contrib.sitemaps.views import sitemap
+from project.sitemap import ProductSitemap, CategorySitemap, IndexSitemap, PageSitemap, ArticleSitemap
+
+sitemaps = {
+    "products": ProductSitemap,
+    "category": CategorySitemap,
+    "index": IndexSitemap,
+    "page": PageSitemap,
+    "article": ArticleSitemap,
+
+}
 admin.autodiscover()
 
 urlpatterns = [
@@ -11,6 +22,9 @@ urlpatterns = [
     url(r'^', include('project.cart.urls')),
     url(r'^', include('authentication.urls')),
     url(r'^robokassa/', include('robokassa.urls')),
+    url(r'^robots.txt$', 'project.core.views.robots_view'),
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
+    name='django.contrib.sitemaps.views.sitemap')
 ]
 
 if settings.DEBUG:
