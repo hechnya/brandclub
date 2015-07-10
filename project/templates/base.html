@@ -35,75 +35,92 @@
             <link rel="stylesheet" href="{% static "kastoreum/js/plugin/prettyphoto/css/prettyPhoto.css" %}" media="screen"/>
         {% endblock %}
     </head>
-        <body>
+        <body class="super-body">
 
-            <div class="container">
-                <div class="row">
-
-                    {% block header %}
-                        {% top_menu request %}
-                    {% endblock %}
-
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 sidebar">
-                        <h2>Список Категорий</h2>
-                        <ul>
-                            {% category request  %}
-                        </ul>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
-
-                        <ol class="breadcrumb">
-                            <li class="active">
-                                {% if request.path_info == "/" %}
-                                    Главная
-                                {% else %}
-                                    <a href="/">Главная</a>
-                                {% endif %}
-                            </li>
-                            {% for breadcrumb in request.breadcrumbs %}
-                                {% if not forloop.last %}
-                                    <li><a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a></li>
-                                {% else %} <li class="active">{{ breadcrumb.name }}</li> {% endif %}
-                            {% endfor %}
-                        </ol>
-
-{#                        <ul class="breadcrumb" style="margin-bottom: 5px;">#}
-{#                            <li><a href="javascript:void(0)">Home</a></li>#}
-{#                            <li><a href="javascript:void(0)">Library</a></li>#}
-{#                            <li class="active">Data</li>#}
-{#                        </ul>#}
-
-
-                        <div class="row">
-                            {% block content %}
-                            {% endblock %}
-                        </div>
-                    </div>
-
-                    {% block articles %}
-                    {% endblock %}
-
-                    <div class="col-xs-12 col-sm-10 col-md-12 col-lg-12 sidebar">
-                        <div class="row">
-                            {% block footer %}
-                                <div class="col-xs-8 col-sm-12 col-md-6 col-lg-4">
-                                    <h4>Контакты</h4>
-                                    <p>090909</p>
-                                    <p>mail</p>
-                                </div>
-                                <div class="col-xs-8 col-sm-12 col-md-6 col-lg-4">
-                                    <h4>Способы оплаты</h4>
-                                    <a href="/page/oplata"><img height="120px"  src= "{% static "kastoreum/images/robokassa2.png" %}" alt=""/></a>
-                                </div>
-                                <div class="col-xs-8 col-xm-12 col-md-6 col-lg-4">
-                                    <h4>Способы доставки</h4>
-                                    <a href="/page/dostavka"><img height="120px"  src= "{% static "kastoreum/images/dostavka.png" %}" alt=""/></a>
-                                </div>
-                            {% endblock  %}
-                        </div>
+            <div class="nav-wrapper">
+                <div class="container">
+                    <div class="row">
+                        {% block header %}
+                            {% top_menu request %}
+                        {% endblock %}
                     </div>
                 </div>
             </div>
+
+            <div class="sw-wrapper">
+                {% block swiper %}
+                {% endblock %}
+            </div>
+
+            <div class="content-wrapper">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="sidebar">
+                                <h2>Список Категорий</h2>
+                                <ul>
+                                    {% category request  %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
+
+                            <ol class="breadcrumb">
+                                <li class="active">
+                                    {% if request.path_info == "/" %}
+                                        Главная
+                                    {% else %}
+                                        <a href="/">Главная</a>
+                                    {% endif %}
+                                </li>
+                                {% for breadcrumb in request.breadcrumbs %}
+                                    {% if not forloop.last %}
+                                        <li><a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a></li>
+                                    {% else %} <li class="active">{{ breadcrumb.name }}</li> {% endif %}
+                                {% endfor %}
+                            </ol>
+
+    {#                        <ul class="breadcrumb" style="margin-bottom: 5px;">#}
+    {#                            <li><a href="javascript:void(0)">Home</a></li>#}
+    {#                            <li><a href="javascript:void(0)">Library</a></li>#}
+    {#                            <li class="active">Data</li>#}
+    {#                        </ul>#}
+
+
+                            <div class="row">
+                                {% block content %}
+                                {% endblock %}
+                            </div>
+                        </div>
+
+                        {% block articles %}
+                        {% endblock %}
+
+                        <div class="col-xs-12 col-sm-10 col-md-12 col-lg-12">
+                            <div class="row">
+                                {% block footer %}
+                                    <div class="col-xs-8 col-sm-12 col-md-6 col-lg-4">
+                                        <h4>Контакты</h4>
+                                        <p>090909</p>
+                                        <p>mail</p>
+                                    </div>
+                                    <div class="col-xs-8 col-sm-12 col-md-6 col-lg-4">
+                                        <h4>Способы оплаты</h4>
+                                        <a href="/page/oplata"><img height="120px"  src= "{% static "kastoreum/images/robokassa2.png" %}" alt=""/></a>
+                                    </div>
+                                    <div class="col-xs-8 col-xm-12 col-md-6 col-lg-4">
+                                        <h4>Способы доставки</h4>
+                                        <a href="/page/dostavka"><img height="120px"  src= "{% static "kastoreum/images/dostavka.png" %}" alt=""/></a>
+                                    </div>
+                                {% endblock  %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
 
 
         <script type="text/javascript" src="{% static "kastoreum/js/jquery-1.11.1.js" %}"></script>

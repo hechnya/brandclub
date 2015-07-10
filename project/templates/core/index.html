@@ -3,7 +3,11 @@
 {% load static from staticfiles %}
 
 {% block header %}
+    {% top_menu request %}
         <!-- Slider main container -->
+{% endblock %}
+
+{% block swiper %}
     <div class="swiper-container">
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
@@ -22,7 +26,6 @@
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
     </div>
-    {% top_menu request %}
 {% endblock %}
 
 {% block content %}

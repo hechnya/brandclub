@@ -12,7 +12,33 @@
 }
 
 .sidebar {
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    background-color: #7bd156;
+    border-radius: 5px;
+    padding: 20px 0;
+}
+
+.sidebar a.category-link {
+    width: 100%;
+    padding: 0px 10px;
+    color: #fff;
+    display: block;
+    text-transform: uppercase;
+}
+
+.sidebar ul {
+    margin:0;
+}
+.sidebar ul li {
+    padding: 10px;
+}
+.sidebar ul li:hover {
+    background-color: #009963;
+}
+.sidebar h2 {
+    margin:0 20px;
+    font-size: 24px;
+    margin-bottom: 20px;
+
 }
 
 .pure_form {
@@ -54,4 +80,25 @@ input.hidden_style{
 .swiper-container .swiper-slide img{
     width: 100%;
     height: auto;
+}
+
+#navbar-example.navbar-default.navbar {
+    background-color: #FFFFFF;
+    color: rgb(82, 82, 82);
+    margin-bottom: 0;
+
+}
+
+.nav-wrapper{
+    background-color: #fff;
+    border-bottom:1px solid #B8B8B8 ;
+}
+
+
+body.super-body {
+    background-color: #FFFFFF;
+}
+
+.content-wrapper{
+    padding: 50px 0px;
 }
