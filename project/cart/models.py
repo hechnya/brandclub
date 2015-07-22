@@ -16,7 +16,7 @@ class CartItem(models.Model):
         verbose_name_plural = u'Корзина'
 
     def total_price(self):
-        return self.count * self.product.price
+        return self.count * self.product.price()
 
     def url(self):
         return self.product.url()

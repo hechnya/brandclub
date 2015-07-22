@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from project.core.models import Product, Article, ProductImage, ArticleImage, PageImage, Page, Category, Slide
+from project.core.models import Product, Article, ProductImage, ArticleImage, PageImage, Page, Category, Slide, ProductWeight
 from project.cart.models import CartItem, Order, Delivery
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -62,9 +62,14 @@ def product_view(request, slug, template_name="core/product.html"):
     product = Product.objects.get(slug=slug)
     category = product.category.all()[0]
     request.breadcrumbs([(category.name, category.url()), (product.name, request.path_info)])
+    list_option = ProductWeight.objects.filter(product=product)
+    option = ProductWeight.objects.get(product=product, is_main=True)
 
     if request.method == 'POST':
-        add_to_cart(request)
+        if "parametr_weight" in request.POST:
+            option = ProductWeight.objects.get(product=product, weight=request.POST['parametr_weight'])
+        else:
+            add_to_cart(request)
 
     # tmp_post = request.POST
 

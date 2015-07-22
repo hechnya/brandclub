@@ -19,6 +19,8 @@
         <link rel="stylesheet" href="{% static "kastoreum/css/font-awesome.css" %}" media="screen"/>
         <link rel="stylesheet" href="{% static "kastoreum/css/animate.css" %}" media="screen"/>
         <link rel="stylesheet" href="{% static "kastoreum/css/swiper.min.css" %}" media="screen"/>
+{#        fancybox#}
+        <link rel="stylesheet" href="{% static "kastoreum/js/fancybox/source/jquery.fancybox.css" %}" media="screen"/>
 
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400italic,400,700,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
@@ -67,11 +69,11 @@
                         <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
 
                             <ol class="breadcrumb">
-                                <li class="active">
+
                                     {% if request.path_info == "/" %}
-                                        Главная
+                                        <li class="active">Главная</li>
                                     {% else %}
-                                        <a href="/">Главная</a>
+                                        <li><a href="/">Главная</a></li>
                                     {% endif %}
                                 </li>
                                 {% for breadcrumb in request.breadcrumbs %}
@@ -96,29 +98,38 @@
 
                         {% block articles %}
                         {% endblock %}
-
-                        <div class="col-xs-12 col-sm-10 col-md-12 col-lg-12">
-                            <div class="row">
-                                {% block footer %}
-                                    <div class="col-xs-8 col-sm-12 col-md-6 col-lg-4">
-                                        <h4>Контакты</h4>
-                                        <p>090909</p>
-                                        <p>mail</p>
-                                    </div>
-                                    <div class="col-xs-8 col-sm-12 col-md-6 col-lg-4">
-                                        <h4>Способы оплаты</h4>
-                                        <a href="/page/oplata"><img height="120px"  src= "{% static "kastoreum/images/robokassa2.png" %}" alt=""/></a>
-                                    </div>
-                                    <div class="col-xs-8 col-xm-12 col-md-6 col-lg-4">
-                                        <h4>Способы доставки</h4>
-                                        <a href="/page/dostavka"><img height="120px"  src= "{% static "kastoreum/images/dostavka.png" %}" alt=""/></a>
-                                    </div>
-                                {% endblock  %}
-                            </div>
-                        </div>
                     </div>
                 </div>
 
+            </div>
+            <div class="footer-wrapper">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-xs-12 col-sm-10 col-md-12 col-lg-12">
+                            <div class="container">
+                                <div class="row">
+                                    {% block footer %}
+                                        <div class="col-xs-8 col-sm-12 col-md-6 col-lg-4">
+                                            <h4>Контакты</h4>
+                                            <p>090909</p>
+                                            <p>mail</p>
+                                        </div>
+                                        <div class="col-xs-8 col-sm-12 col-md-6 col-lg-4">
+                                            <h4>Способы оплаты</h4>
+                                            <a href="/page/oplata"><img height="120px"  src= "{% static "kastoreum/images/robokassa2.png" %}" alt=""/></a>
+                                        </div>
+                                        <div class="col-xs-8 col-xm-12 col-md-6 col-lg-4">
+                                            <h4>Способы доставки</h4>
+                                            <a href="/page/dostavka"><img height="120px"  src= "{% static "kastoreum/images/dostavka.png" %}" alt=""/></a>
+                                        </div>
+                                    {% endblock  %}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
 
@@ -127,6 +138,8 @@
         <script type="text/javascript" src="{% static "kastoreum/js/jquery-validation-1/dist/jquery.validate.min.js" %}"></script>
         <script type="text/javascript" src="{% static "kastoreum/js/jquery-validation-1/dist/localization/messages_ru.min.js" %}"></script>
         <script type="text/javascript" src="{% static "kastoreum/js/bootstrap.js" %}"></script>
+{#            fancybox#}
+        <script type="text/javascript" src="{% static "kastoreum/js/fancybox/source/jquery.fancybox.js" %}"></script>
 {#            material#}
             <script type="text/javascript" src="{% static "kastoreum/material/dist/js/material.js" %}"></script>
             <script type="text/javascript" src="{% static "kastoreum/material/dist/js/ripples.js" %}"></script>
@@ -148,6 +161,17 @@
             </script>
 
         {% block page_js %}
+            <script>
+                $(function(){
+                    $(window).scroll(function() {
+                        var top = $(document).scrollTop();
+                        if (top < 70)
+                            $(".sidebar").css({top: '0', position: 'relative'});
+                        else
+                            $(".sidebar").css({top: '75px', position: 'fixed'});
+                    });
+                });
+            </script>
 {#            <script type="text/javascript" src="{% static "kastoreum/js/plugin/appear/jquery.appear.js" %}"></script>#}
 {#            <script type="text/javascript" src="{% static "kastoreum/js/plugin/count/jquery.countTo.js" %}"></script>#}
 {#            <script type="text/javascript" src="{% static "kastoreum/js/plugin/mediaelement/mediaelement-and-player.js" %}"></script>#}

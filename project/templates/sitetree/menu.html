@@ -41,7 +41,7 @@
 
           </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="username">{{ user }}</li>
+                <li class="username">{{ user.get_full_name }}</li>
                 <li id="fat-menu" class="dropdown">
                     <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="mdi-action-add-shopping-cart"></i>Корзина {{ user.username }}<b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">

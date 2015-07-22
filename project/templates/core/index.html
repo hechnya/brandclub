@@ -38,26 +38,53 @@
             {% for product in products %}
 
                     <div class="col-md-4 product">
-                        <img style="height:150px;" src="/media/{{ product.get_image.image }}" alt=""/>
+                        <a href="/product/{{ product.slug }}"><img style="" src="/media/{{ product.get_image.image }}" alt=""/></a>
                         <h3>{{ product.name }}</h3>
                         <p class="description_product">{{ product.description|truncatewords:12 }}</p>
-                        <p> цена : {{ product.price }}  рублей</p>
+                        <p>
+                            <a class="" href="/product/{{ product.slug }}">подробнее о товаре</a>
+                        </p>
+                        <p>
+                            <i class="fa fa-chevron-down"></i>
+                            ЦЕНА : <b>{{ product.price }}</b> рублей
+                        </p>
+                        <p>
+                            <i class="fa fa-chevron-down"></i>
+                            ВЕС: {{ product.weight}} грамм
+                        </p>
 
                         <form action="" method="post">{% csrf_token %}
                             <input type="hidden" name="id" value="{{ product.id }}"/>
-                            <input size="2" type="text" name="count" value="1" placeholder="ШТ"/>
+                            <p>
+                                <i class="fa fa-chevron-down"></i>
+                                Кол-во: <input size="2" type="text" name="count" value="1" />
+                            </p>
                             <div class="btn btn-primary">
                                 <i class="mdi-action-add-shopping-cart"></i>
-                                <input type="submit" class="hidden_style" value="Добавить" />
+                                <input type="submit" class="hidden_style" value="Добавить в корзину" />
                             </div>
                         </form>
 
-                        <a class="btn btn-success" href="/product/{{ product.slug }}">подробнее</a>
+{#                        <a class="btn btn-success" href="/product/{{ product.slug }}">подробнее</a>#}
                     </div>
             {% endfor %}
         </div>
     </div>
 
+{% endblock %}
+
+{% block page_js %}
+    <script>
+        $(function(){
+            $(window).scroll(function() {
+                var top = $(document).scrollTop();
+                if (top < 370)
+                    $(".sidebar").css({top: '0', position: 'relative'});
+                else
+                    $(".sidebar").css({top: '75px', position: 'fixed'});
+            });
+        });
+    </script>
 {% endblock %}
 
 {#{% block articles %}#}
