@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from project.core.models import Product ,Article, ProductImage ,ArticleImage ,PageImage ,Page, Category
-from project.cart.models import CartItem, Order ,Delivery
+from project.core.models import Product, Article, ProductImage, ArticleImage, PageImage, Page, Category, Slide, ProductWeight
+from project.cart.models import CartItem, Order, Delivery
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from project.cart import cart
@@ -34,6 +34,7 @@ def indexView(request, template_name='core/index.html'):
 
     products = Product.objects.all()
     # new_test = STATIC_ROOT
+    slides = Slide.objects.all()
 
     if request.method == 'POST':
         add_to_cart(request)
@@ -61,9 +62,16 @@ def indexView(request, template_name='core/index.html'):
 def product_view(request, slug, template_name="core/product.html"):
 
     product = Product.objects.get(slug=slug)
+    category = product.category.all()[0]
+    request.breadcrumbs([(category.name, category.url()), (product.name, request.path_info)])
+    list_option = ProductWeight.objects.filter(product=product)
+    option = ProductWeight.objects.get(product=product, is_main=True)
 
     if request.method == 'POST':
-        add_to_cart(request)
+        if "parametr_weight" in request.POST:
+            option = ProductWeight.objects.get(product=product, weight=request.POST['parametr_weight'])
+        else:
+            add_to_cart(request)
 
     # tmp_post = request.POST
 
@@ -73,6 +81,7 @@ def product_view(request, slug, template_name="core/product.html"):
 def page_view(request, slug, template_name="core/page.html" ):
 
     page = Page.objects.get(slug=slug)
+    request.breadcrumbs(page.name, request.path_info)
     try:
         page.pageimage = PageImage.objects.filter(page=page)[0]
     except:
@@ -87,6 +96,7 @@ def article_view(request, id, template_name="core/article.html"):
 
     article = Article.objects.get(id=id)
     article.articleimage = ArticleImage.objects.filter(article=article)[0]
+    request.breadcrumbs(article.name, request.path_info)
 
     return render_to_response(template_name, locals(), context_instance=RequestContext(request))
 
@@ -95,6 +105,7 @@ def category_view(request, slug, template_name="core/category.html"):
 
     category = Category.objects.get(slug=slug)
     products = Product.objects.filter(category=category)
+    request.breadcrumbs(category.name, request.path_info)
 
     if request.method == 'POST':
         add_to_cart(request)
@@ -106,6 +117,7 @@ def category_view(request, slug, template_name="core/category.html"):
 def products_view(request, template_name="core/products.html"):
 
     products = Product.objects.all()
+    request.breadcrumbs("Продукты", request.path_info)
 
     if request.method == 'POST':
         add_to_cart(request)
@@ -159,6 +171,8 @@ def order_view(request, id, template_name="core/order.html"):
 
     return render_to_response(template_name, locals(), context_instance=RequestContext(request))
 
+def robots_view(request):
+    return render_to_response("robots.txt", content_type="text/plain")
 
 
 

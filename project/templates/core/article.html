@@ -1,25 +1,30 @@
 {% extends "base.html" %}
 {% load static from staticfiles %}
 
+{% block head %}
+    {% if article.meta_title != "" %}
+        <title>{{ article.meta_title }} | аптека здоровья kastoreum.ru</title>
+    {% else %}
+        <title>{{ article.name }} | аптека здоровья kastoreum.ru</title>
+    {% endif %}
+    {% if article.meta_description != "" %}
+        <meta name="description" content="{{ article.meta_description }}"/>
+    {% else %}
+        <meta name="description" content="{{ article.text|truncatechars:160 }}"/>
+    {% endif %}
+{% endblock %}
 
 
 {% block content %}
 
     <div class="col-md-12">
         <div class="row">
-{##}
-{#            <div class="col-md-4">#}
-{#                <img style="height:150px;" src="/media/{{ page.pageimage.url}}" alt=""/>#}
-{#                        <p>{{ product.image.image }}</p>#}
-{#                <h3>{{ page.name }}</h3>#}
-{#                <p>{{ page.text}}</p>#}
-{#            </div>#}
-
-            <div class="col-md-12">
-
-                <img src="/media/{{ article.articleimage.url}}" alt=""/>
-                    <p>{{ article.name }} </p> <p> {{ article.text }} </p>
-
+            <div class="col-sm-12 col-xs-4 col-md-4 col-lg-3">
+                <img style="width: 100%"src="/media/{{ article.articleimage.url}}" alt=""/>
+            </div>
+            <div class="col-sm-12 col-xs-8 col-md-8 col-lg-9">
+                <h2>{{ article.name }} </h2>
+                <p> {{ article.text }} </p>
             </div>
 
         </div>

@@ -1,9 +1,24 @@
 {% extends "base.html" %}
 {% load static from staticfiles %}
 
+{% block head %}
+    {% if page.meta_title != "" %}
+        <title>{{ page.meta_title }} | аптека здоровья kastoreum.ru</title>
+    {% else %}
+        <title>{{ page.name }} | аптека здоровья kastoreum.ru</title>
+    {% endif %}
+    {% if page.meta_description != "" %}
+        <meta name="description" content="{{ page.meta_description }}"/>
+    {% else %}
+        <meta name="description" content="{{ page.page|truncatechars:160 }}"/>
+    {% endif %}
+{% endblock %}
+
+
 {% block content %}
 
     <div class="col-md-12">
+
         <div class="row">
 
             <div class="col-md-4">
