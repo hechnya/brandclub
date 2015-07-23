@@ -76,11 +76,11 @@ class Product(models.Model):
     def get_image(self):
         return ProductImage.objects.filter(product=self)[0]
 
-    def weight(self):
-        return ProductWeight.objects.get(product=self, is_main=True).weight
+    def paramemtr(self):
+        return ProductParametr.objects.get(product=self, is_main=True).weight
 
     def price(self):
-        return ProductWeight.objects.get(product=self, is_main=True).price
+        return ProductParametr.objects.get(product=self, is_main=True).price
 
 
 class ProductImage(models.Model):
@@ -95,7 +95,7 @@ class ProductImage(models.Model):
         return self.product.name + "-" + self.image.name
 
 
-class ProductWeight(models.Model):
+class ProductParametr(models.Model):
     weight = models.IntegerField()
     price = models.IntegerField()
     product = models.ForeignKey(Product)

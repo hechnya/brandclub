@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from project.core.models import Product, Article, ProductImage, ArticleImage, PageImage, Page, Category, Slide, ProductWeight
+from project.core.models import Product, Article, ProductImage, ArticleImage, PageImage, Page, Category, Slide, ProductParametr
 from project.cart.models import CartItem, Order, Delivery
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -15,6 +15,7 @@ def add_to_cart(request):
     id = request.POST['id']
     product = Product.objects.get(id=id)
     cart_id = cart.set_cart_id(request)
+    id_parametr = request.POST['id_parametr']
 
     try:
         tmp_item = CartItem.objects.get(cart_id=cart_id, product=product)
@@ -22,6 +23,7 @@ def add_to_cart(request):
         tmp_item.save()
     except:
         cartItem = CartItem()
+        cartItem.parametr = ProductParametr.objects.get(id=id_parametr)
         cartItem.product = product
         cartItem.count = request.POST['count']
         cartItem.cart_id = cart_id
@@ -62,12 +64,12 @@ def product_view(request, slug, template_name="core/product.html"):
     product = Product.objects.get(slug=slug)
     category = product.category.all()[0]
     request.breadcrumbs([(category.name, category.url()), (product.name, request.path_info)])
-    list_option = ProductWeight.objects.filter(product=product)
-    option = ProductWeight.objects.get(product=product, is_main=True)
+    list_parametr = ProductParametr.objects.filter(product=product)
+    parametr = ProductParametr.objects.get(product=product, is_main=True)
 
     if request.method == 'POST':
         if "parametr_weight" in request.POST:
-            option = ProductWeight.objects.get(product=product, weight=request.POST['parametr_weight'])
+            parametr = ProductParametr.objects.get(product=product, weight=request.POST['parametr_weight'])
         else:
             add_to_cart(request)
 

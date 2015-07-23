@@ -93,7 +93,7 @@ def cart_view(request, template_name="cart/cart.html"):
         region = request.POST["region"]
         weight = 0
         for item in cart_items:
-            weight = weight + item.product.weight() * item.count
+            weight = weight + item.parametr.weight * item.count
 
         cart_info.delivery_price = delivery.calculate_delivery(weight, region)
         cart_info.get_total_price()
