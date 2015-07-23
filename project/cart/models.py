@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from project.core.models import Product
+from project.core.models import Product, ProductParametr
 # from django.contrib.auth.models import User
 from authentication.models import Account
 
@@ -10,13 +10,14 @@ class CartItem(models.Model):
     # user = models.ForeignKey(Account)
     count = models.IntegerField()
     cart_id = models.CharField(max_length=240)
+    parametr = models.ForeignKey(ProductParametr)
 
     class Meta:
         verbose_name = u'Объект корзины'
         verbose_name_plural = u'Корзина'
 
     def total_price(self):
-        return self.count * self.product.price()
+        return self.count * self.parametr.price
 
     def url(self):
         return self.product.url()

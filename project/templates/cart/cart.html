@@ -28,7 +28,7 @@
                             <tr>
                                 <td><img style="height:100px;" src="/media/{{ item.product.get_image.image }}" alt=""/></td>
                                 <td>{{ item.product.name }}</td>
-                                <td>{{ item.product.price }}</td>
+                                <td>{{ item.parametr.price }}</td>
                                 <td>
                                     <form action="" method="post">{% csrf_token %}
                                         <input type="text" name="count" class="" size="2" value="{{ item.count }}" />
