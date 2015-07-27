@@ -20,24 +20,31 @@
                         <p>
                             <a class="" href="/product/{{ product.slug }}">подробнее о товаре</a>
                         </p>
-                        <p>
+                        <p class="product_price">
                             <i class="fa fa-chevron-down"></i>
                             ЦЕНА : <b>{{ product.price }}</b>  рублей
                         </p>
                          <p>
                             <i class="fa fa-chevron-down"></i>
-                            ВЕС: {{ product.weight}} грамм
+                         ВЫБЕРИТЕ ВЕС
+                             <select data-theme="bootstrap" name="parametr_weight" id="">
+                                {% for parametr in product.list_parametr %}
+                                    <option value="{{ parametr.price }}">{{ parametr.weight }} гр </option>
+                                {% endfor %}
+                            </select>
                         </p>
 
                         <form action="" method="post">{% csrf_token %}
-                            <input type="hidden" name="id" value="{{ product.id }}"/>
+                            <input type="hidden" class="product_id" name="id" value="{{ product.id }}"/>
+                            <input type="hidden" class="parametr_price" name="parametr_price" value="{{ product.list_parametr.first.price }}"/>
                             <p>
                                 <i class="fa fa-chevron-down"></i>
                                 Кол-во: <input size="2" type="text" name="count" value="1" />
                             </p>
                             <div class="btn btn-primary">
-                                <i class="mdi-action-add-shopping-cart"></i>
-                                <input type="submit" class="hidden_style" value="Добавить в корзину" />
+                                <i class="mdi-action-add-shopping-cart ajax-submit"></i>
+{#                                <input type="submit" class="hidden_style" value="Добавить в корзину" />#}
+                                Добавить
                             </div>
                         </form>
                     </div>
@@ -48,24 +55,58 @@
 
 {% endblock %}
 
-{% block articles %}
-{#    <div class="col-md-12">#}
-{#        {% for article in articles %}#}
-{#            <img src="/media/{{ article.image.url }}" alt=""/>#}
-{#            <h4>{{ article.name }} - {{ article.date }}</h4>#}
-{#            <p>{{ article.text }}</p>#}
-{#             <a href="/article/{{ article.id }}">далее</a>#}
-{##}
-{#        {% endfor %}#}
-{#    </div>#}
-{#    <div class="col-md-12">#}
-{#        {% for page in pages  %}#}
-{#            <img src="/media/{{ page.image.url }}" alt=""/>#}
-{#            <h4>{{ page.name }} </h4>#}
-{#            <p>{{ page.page }}</p>#}
-{#            <a href="/page/{{ page.slug }}">подробнее</a>#}
-{##}
-{#        {% endfor %}#}
-{#    </div>#}
-{% endblock %}
+{% block page_js %}
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".fancybox").fancybox();
+
+        $('select').comboSelect({});
+
+        $(".combo-dropdown li").on("click", function (){
+            var price = $(this).attr('data-value');
+{#            var test = $(this).parent(".product").children(".product_price b").html();#}
+            $(this).parents(".product").children(".product_price").children("b").html(price);
+{#            $(this).parents(".product").children(".parametr_price").val();#}
+            $(this).parents(".product").children("form").children(".parametr_price").val(price);
+{#            console.log(test);#}
+        });
+
+
+        $(".ajax-submit").on("click", function(){
+            var csrftoken = $.cookie('csrftoken');
+            var price = $(".option-selected").attr('data-value');
+            var product_id = $(".product_id").val();
+            var count = $(".count").val();
+            console.log(price);
+            console.log(product_id);
+            $.post(
+                "/ajax-cart/",
+                {
+                    csrfmiddlewaretoken: csrftoken,
+                    parametr_price: price,
+                    id: product_id,
+                    count: count
+                },
+                onAjaxSuccess
+            );
+            function onAjaxSuccess(data) {
+                alert("товар успешно добавлен в корзину");
+            }
+        });
+	});
+</script>
+
+<script>
+    $(function(){
+        $(window).scroll(function() {
+            var top = $(document).scrollTop();
+            if (top < 70)
+                $(".sidebar").css({top: '0', position: 'relative'});
+            else
+                $(".sidebar").css({top: '75px', position: 'fixed'});
+        });
+    });
+</script>
+
+{% endblock %}
