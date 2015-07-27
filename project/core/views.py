@@ -5,7 +5,8 @@ from project.cart.models import CartItem, Order, Delivery
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from project.cart import cart
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
+import json
 
 from project.settings import STATIC_ROOT
 
@@ -15,15 +16,16 @@ def add_to_cart(request):
     id = request.POST['id']
     product = Product.objects.get(id=id)
     cart_id = cart.set_cart_id(request)
-    id_parametr = request.POST['id_parametr']
+    parametr_price = request.POST['parametr_price']
+    parametr = ProductParametr.objects.get(product=product, price=parametr_price)
 
     try:
-        tmp_item = CartItem.objects.get(cart_id=cart_id, product=product)
+        tmp_item = CartItem.objects.get(cart_id=cart_id, product=product, parametr=parametr)
         tmp_item.count += int(request.POST['count'])
         tmp_item.save()
     except:
         cartItem = CartItem()
-        cartItem.parametr = ProductParametr.objects.get(id=id_parametr)
+        cartItem.parametr = parametr
         cartItem.product = product
         cartItem.count = request.POST['count']
         cartItem.cart_id = cart_id
@@ -35,6 +37,9 @@ def indexView(request, template_name='core/index.html'):
     products = Product.objects.all()
     # new_test = STATIC_ROOT
     slides = Slide.objects.all()
+
+    for product in products:
+        product.list_parametr = ProductParametr.objects.filter(product=product)
 
     if request.method == 'POST':
         add_to_cart(request)
@@ -53,6 +58,7 @@ def indexView(request, template_name='core/index.html'):
             pag.image = pag.image[0]
         except:
             pass
+
 
 
     return render_to_response(template_name, locals(), context_instance=RequestContext(request))
@@ -107,6 +113,9 @@ def category_view(request, slug, template_name="core/category.html"):
     products = Product.objects.filter(category=category)
     request.breadcrumbs(category.name, request.path_info)
 
+    for product in products:
+        product.list_parametr = ProductParametr.objects.filter(product=product)
+
     if request.method == 'POST':
         add_to_cart(request)
 
@@ -119,9 +128,11 @@ def products_view(request, template_name="core/products.html"):
     products = Product.objects.all()
     request.breadcrumbs("Продукты", request.path_info)
 
+    for product in products:
+        product.list_parametr = ProductParametr.objects.filter(product=product)
+
     if request.method == 'POST':
         add_to_cart(request)
-
 
     return render_to_response(template_name, locals(), context_instance=RequestContext(request))
 
@@ -171,8 +182,18 @@ def order_view(request, id, template_name="core/order.html"):
 
     return render_to_response(template_name, locals(), context_instance=RequestContext(request))
 
+
 def robots_view(request):
     return render_to_response("robots.txt", content_type="text/plain")
+
+
+def ajax_cart(request):
+    add_to_cart(request)
+    global_quantity = 0
+    data = json.dumps({
+        "global_quantity": global_quantity
+        })
+    return HttpResponse(data, content_type="application/json")
 
 
 

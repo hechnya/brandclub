@@ -12,6 +12,7 @@
         <!-- main css -->
         <link rel="stylesheet" href="{% static "kastoreum/css/style.css" %}" media="screen"/>
         <link rel="stylesheet" href="{% static "kastoreum/css/bootstrap.css" %}" media="screen"/>
+        <link rel="stylesheet" href="{% static "kastoreum/js/combo-select-master/combo.select.css" %}" media="screen"/>
 {#        material#}
         <link rel="stylesheet" href="{% static "kastoreum/material/dist/css/material.css" %}" media="screen"/>
         <link rel="stylesheet" href="{% static "kastoreum/material/dist/css/ripples.css" %}" media="screen"/>
@@ -135,6 +136,7 @@
 
 
         <script type="text/javascript" src="{% static "kastoreum/js/jquery-1.11.1.js" %}"></script>
+        <script type="text/javascript" src="{% static "kastoreum/js/jquery.cookie.js" %}"></script>
         <script type="text/javascript" src="{% static "kastoreum/js/jquery-validation-1/dist/jquery.validate.min.js" %}"></script>
         <script type="text/javascript" src="{% static "kastoreum/js/jquery-validation-1/dist/localization/messages_ru.min.js" %}"></script>
         <script type="text/javascript" src="{% static "kastoreum/js/bootstrap.js" %}"></script>
@@ -147,7 +149,10 @@
             <script>$.material.init()</script>
 
             <script  type="text/javascript" src="{% static "kastoreum/js/swiper.min.js" %}"></script>
+            <script type="text/javascript" src="{% static "kastoreum/js/combo-select-master/jquery.combo.select.js" %}"></script>
             <script>
+
+
                 var swiper = new Swiper('.swiper-container', {
                     pagination: '.swiper-pagination',
                     nextButton: '.swiper-button-next',

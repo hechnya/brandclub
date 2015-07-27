@@ -59,26 +59,27 @@
                 <div class="list-group-separator separator"></div>
                 <div class="row">
                     <div class="col-md-6">
-                        <p><i class="fa fa-chevron-down"></i> вес: {{ parametr.weight }}</p>
+                        <p><i class="fa fa-chevron-down"></i> Выберите вес: </p>
 
                         <form action="." method="post">
                             {% csrf_token %}
-                            <select name="parametr_weight" id="">
+                            <select data-theme="bootstrap" name="parametr_weight" id="">
                                 {% for parametr in list_parametr %}
-                                    <option value="{{ parametr.weight }}">{{ parametr.weight }}</option>
+                                    <option value="{{ parametr.price }}">{{ parametr.weight }} гр </option>
                                 {% endfor %}
                             </select>
-                            <input type="submit" value="пересчитать" />
+{#                            <input type="submit" value="пересчитать" />#}
                         </form>
                     </div>
                     <div class="col-md-6">
                         <form action="" method="post">{% csrf_token %}
-                            <input type="hidden" name="id" value="{{ product.id }}"/>
-                            <input type="hidden" name="id_parametr" value="{{ parametr.id }}"/>
-                            <i class="fa fa-chevron-down"></i> Кол-во: <input size="2" type="text" name="count" value="1" />
-                                <div class="btn btn-primary">
+                            <input type="hidden" class="product_id" name="id" value="{{ product.id }}"/>
+                            <input type="hidden" class="parametr_price" name="parametr_price" value="{{ parametr.price }}"/>
+                            <i class="fa fa-chevron-down"></i> Кол-во: <input size="2" class="count" type="text" name="count" value="1" />
+                                <div class="btn btn-primary ajax-submit">
                                     <i class="mdi-action-add-shopping-cart"></i>
-                                    <input type="submit" class="hidden_style" value="Добавить" />
+{#                                    <input type="submit" class="hidden_style" value="Добавить" />#}
+                                    Добавить
                                 </div>
                         </form>
 
@@ -134,6 +135,53 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$(".fancybox").fancybox();
+
+        $('select').comboSelect({
+{#            comboClass         : 'combo-select', /* outer container class */#}
+{#            comboArrowClass    : 'combo-select-arrow', /* arrow class */#}
+{#            comboDropDownClass : 'combo-drop-down', /* dropdown class */#}
+{#            inputClass         : 'combobox-input text-input', /* Input element class */#}
+{#            disabledClass      : 'option-disabled', /* Disabled class */#}
+{#            hoverClass         : 'option-hover', /* dropdown list hover class */#}
+{#            selectedClass      : 'option-selected', /* dropdown list selected class */#}
+{#            markerClass        : 'combo-marker', /* Search marker class */#}
+{#            maxHeight          : 200, /* Max height of dropdown */#}
+{#            themeClass         : '', /* Theme using external classes */#}
+{#            extendStyle        : true /* Copy all inline styles from original select */#}
+        });
+
+        $(".combo-dropdown li").on("click", function (){
+{#            alert("hello");#}
+            var price = $(this).attr('data-value');
+            var product_id = $(".product_id").val();
+            var count = $(".count").val();
+            $(".price p").html(price + " p");
+            $(".parametr_price").val(price);
+        });
+
+
+        $(".ajax-submit").on("click", function(){
+            var csrftoken = $.cookie('csrftoken');
+            var price = $(".option-selected").attr('data-value');
+            var product_id = $(".product_id").val();
+            var count = $(".count").val();
+            console.log(price);
+            console.log(product_id);
+            $.post(
+                "/ajax-cart/",
+                {
+                    csrfmiddlewaretoken: csrftoken,
+                    parametr_price: price,
+                    id: product_id,
+                    count: count
+                },
+                onAjaxSuccess
+            );
+            function onAjaxSuccess(data) {
+                alert("товар успешно добавлен в корзину");
+            }
+        });
+
 	});
 </script>
 
