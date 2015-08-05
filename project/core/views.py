@@ -33,7 +33,7 @@ def add_to_cart(request):
 
 
 def indexView(request, template_name='core/index.html'):
-    dir_test = settings
+    # dir_test = settings
 
     products = Product.objects.all()
     # new_test = STATIC_ROOT
@@ -60,8 +60,6 @@ def indexView(request, template_name='core/index.html'):
         except:
             pass
 
-
-
     return render_to_response(template_name, locals(), context_instance=RequestContext(request))
     # return render(request, 'core/index.html', {'products': products ,'articles' : articles })
 
@@ -73,6 +71,7 @@ def product_view(request, slug, template_name="core/product.html"):
     request.breadcrumbs([(category.name, category.url()), (product.name, request.path_info)])
     list_parametr = ProductParametr.objects.filter(product=product)
     parametr = ProductParametr.objects.get(product=product, is_main=True)
+    list_image = ProductImage.objects.filter(product=product)
 
     if request.method == 'POST':
         if "parametr_weight" in request.POST:
@@ -160,7 +159,7 @@ def article_add_view(request, template_name="core/article_add.html"):
 
 
 def account_view(request, template_name="core/account.html"):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated() and request.user.is_staff:
         orders = Order.objects.all()
 
         for order in orders:

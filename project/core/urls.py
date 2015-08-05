@@ -21,6 +21,8 @@ urlpatterns = patterns('project.core.views',
     url(r'^ajax-cart/$', 'ajax_cart'),
 
 
+
+
     # url(r'^articles$', 'articlesView',
     #     {'template_name': 'core/articles.html'},
     #     name='articlesView'),

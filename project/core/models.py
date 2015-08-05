@@ -86,6 +86,7 @@ class Product(models.Model):
 class ProductImage(models.Model):
     image = models.ImageField(upload_to="product")
     product = models.ForeignKey(Product)
+    is_main = models.BooleanField(default=False, verbose_name=u"Основной параметр")
 
     class Meta:
         verbose_name = u'Изображение'

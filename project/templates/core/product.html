@@ -22,7 +22,9 @@
         <div class="row">
 
             <div class="col-xs-4 col-xm-12 col-md-5 col-lg-6">
-                <a class="fancybox" rel="group" href="/media/{{ product.get_image.image }}"><img src="/media/{{ product.get_image.image }}" alt=""/></a>
+                {% for image in list_image%}
+                    <a class="fancybox {% if not forloop.first %}hidden{% endif %}" rel="group" href="/media/{{ image.image }}"><img src="/media/{{ image.image }}" alt=""/></a>
+                {% endfor %}
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs color-white">
                   <li class="active"><a href="#description" data-toggle="tab">Описание</a></li>
@@ -76,8 +78,8 @@
                             <input type="hidden" class="product_id" name="id" value="{{ product.id }}"/>
                             <input type="hidden" class="parametr_price" name="parametr_price" value="{{ parametr.price }}"/>
                             <i class="fa fa-chevron-down"></i> Кол-во: <input size="2" class="count" type="text" name="count" value="1" />
-                                <div class="btn btn-primary">
-                                    <i class="mdi-action-add-shopping-cart ajax-submit"></i>
+                                <div class="btn btn-primary ajax-submit">
+                                    <i class="mdi-action-add-shopping-cart "></i>
 {#                                    <input type="submit" class="hidden_style" value="Добавить" />#}
                                     Добавить
                                 </div>
@@ -113,12 +115,7 @@
 
                             Мы стараемся сделать так, чтобы наши покупатели смогли получить наши товары удобным для них способом. Для Москвы мы можем предложить следующие варианты доставки:
                             Курьер по Москве (в пределах МКАД)
-                            Курьер по Московской области
-                            Доставка в постаматы PickPoint
-                            Самовывоз
-                            Подробнее о доставке...
-                            Обратите внимание, что при заказе свыше 2000 рублей курьерская доставка в пределах МКАД осуществляется бесплатно.
-                            В Вашем заказе товаров на 0 рублей.
+                            Курьер по Московской области.
                             </p>
                         </div>
                     </div>
@@ -126,6 +123,24 @@
             </div>
 
         </div>
+    </div>
+    <div id="complete-dialog" class="modal fade" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">Поздравляем</h4>
+          </div>
+          <div class="modal-body">
+            <p>
+                Товар добавлен в корзину.
+            </p>
+          </div>
+          <div class="modal-footer">
+              <a href="/cart/" class="btn btn-primary"> Перейти в корзину</a>
+          </div>
+        </div>
+      </div>
     </div>
 
 {% endblock %}
@@ -178,7 +193,7 @@
                 onAjaxSuccess
             );
             function onAjaxSuccess(data) {
-                alert("товар успешно добавлен в корзину");
+                $("#complete-dialog").modal();
             }
         });
 
@@ -189,12 +204,17 @@
     $(function(){
         $(window).scroll(function() {
             var top = $(document).scrollTop();
-            if (top < 70)
+            if (top < 70) {
                 $(".sidebar").css({top: '0', position: 'relative'});
-            else
-                $(".sidebar").css({top: '75px', position: 'fixed'});
+                $(".cart_menu").css({top: '0', position: 'relative'});
+                }
+            else {
+                $(".sidebar").css({top: '115px', position: 'fixed'});
+                $(".cart_menu").css({top: '75px', position: 'fixed'});
+                }
         });
     });
 </script>
+
 
 {% endblock %}
