@@ -33,7 +33,6 @@ def add_to_cart(request):
 
 
 def indexView(request, template_name='core/index.html'):
-    dir_test = settings
 
     products = Product.objects.all()
     # new_test = STATIC_ROOT
