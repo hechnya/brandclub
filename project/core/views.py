@@ -33,7 +33,6 @@ def add_to_cart(request):
 
 
 def indexView(request, template_name='core/index.html'):
-    # dir_test = settings
 
     products = Product.objects.all()
     # new_test = STATIC_ROOT
@@ -195,6 +194,15 @@ def ajax_cart(request):
         })
     return HttpResponse(data, content_type="application/json")
 
+
+def success_views(request, template_name="robokassa/success.html"):
+
+    return render_to_response(template_name, locals(), context_instance=RequestContext(request))
+
+
+def fail_views(request, template_name="robokassa/fail.html"):
+
+    return render_to_response(template_name, locals(), context_instance=RequestContext(request))
 
 
 
