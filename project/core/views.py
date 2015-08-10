@@ -195,6 +195,15 @@ def ajax_cart(request):
     return HttpResponse(data, content_type="application/json")
 
 
+def success_views(request, template_name="robokassa/success.html"):
+
+    return render_to_response(template_name, locals(), context_instance=RequestContext(request))
+
+
+def fail_views(request, template_name="robokassa/fail.html"):
+
+    return render_to_response(template_name, locals(), context_instance=RequestContext(request))
+
 
 
 

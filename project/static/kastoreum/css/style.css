@@ -1,4 +1,10 @@
 /*наши стили*/
+.content-wrapper a {
+    color: #009963;
+}
+.content-wrapper a:hover {
+    color: #333;
+}
 .product {
     /*height: 500px;*/
     margin-bottom: 65px;
@@ -252,10 +258,13 @@ button.close:hover {
     padding: 0px 0px 9px 0px;
 }
 
-.cart_menu  a:hover, a:focus,
 .cart_menu .mdi-action-add-shopping-cart {
     color:  #009963;
 }
-.cart_menu  a {
-    color:  #333333;
+/*.cart_menu  a {*/
+    /*color:  #333333;*/
+/*}*/
+.panel-title{
+    padding: 10px;
+    background-color: #009963;
 }

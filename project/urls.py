@@ -21,10 +21,13 @@ urlpatterns = [
     url(r'^', include('project.core.urls')),
     url(r'^', include('project.cart.urls')),
     url(r'^', include('authentication.urls')),
+    url(r'^robokassa/fail/$', 'project.core.views.fail_views'),
+    url(r'^robokassa/success/$', 'project.core.views.success_views'),
     url(r'^robokassa/', include('robokassa.urls')),
     url(r'^robots.txt$', 'project.core.views.robots_view'),
-    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
-    name='django.contrib.sitemaps.views.sitemap')
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+
+
 ]
 
 if settings.DEBUG:
