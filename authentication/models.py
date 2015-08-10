@@ -17,6 +17,7 @@ class AccountManager(BaseUserManager):
         )
 
         account.set_password(password)
+        account.is_active = True
         account.save()
 
         return account

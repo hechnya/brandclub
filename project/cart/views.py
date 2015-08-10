@@ -10,9 +10,10 @@ from django.contrib.auth import login, logout
 from authentication.forms import AccountForm, PureAccountForm, DeliveryForm
 from project.settings import ADMIN_EMAIL
 from django.core.mail import send_mail, EmailMultiAlternatives
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from robokassa.forms import RobokassaForm
 from robokassa.signals import result_received
+import json
 
 from django.contrib.sessions.models import Session
 
@@ -20,18 +21,22 @@ from django.contrib.sessions.models import Session
 def cart_view(request, template_name="cart/cart.html"):
 
     cart_id = cart.set_cart_id(request)
+    region = cart.get_region(request)
+
     user = request.user
     form = AccountForm()
     delivery_form = DeliveryForm()
 
-    delivery_status = False
-
     if user.is_authenticated():
+        if region == 'МОСКВА':
+            initial_region = user.city
+        else:
+            initial_region = region
         data = {
             'first_name': user.first_name,
             'last_name': user.last_name,
             'zip': user.zip,
-            'city': user.city,
+            'city': initial_region,
             'address': user.address,
             'phone': user.phone
         }
@@ -66,6 +71,13 @@ def cart_view(request, template_name="cart/cart.html"):
                 username = request.POST['username']
                 user = Account.objects.create_user(email, password=password, username=username)
                 login(request, user)
+                user.first_name = request.POST['first_name']
+                user.last_name = request.POST['last_name']
+                user.zip = request.POST['zip']
+                user.city = request.POST['city']
+                user.address = request.POST['address']
+                user.phone = request.POST['phone']
+                user.save()
 
         order = Order()
         order.user = user
@@ -89,28 +101,26 @@ def cart_view(request, template_name="cart/cart.html"):
         tmp_item.count = tmp_count
         tmp_item.save()
 
-    elif request.method == "POST" and "post_city" in request.POST:
-        region = request.POST["region"]
-        weight = 0
-        for item in cart_items:
-            weight = weight + item.parametr.weight * item.count
-
-        cart_info.delivery_price = delivery.calculate_delivery(weight, region)
-        cart_info.get_total_price()
-
-        try:
-            delivery_item = Delivery.objects.get(cart_id=cart_id)
-            delivery_item.city = region
-            delivery_item.price = cart_info.delivery_price
-            delivery_item.save()
-            delivery_status = True
-        except:
-            delivery_item = Delivery()
-            delivery_item.city = region
-            delivery_item.price = cart_info.delivery_price
-            delivery_item.cart_id = cart_id
-            delivery_item.save()
-            delivery_status = True
+    # elif request.method == "POST" and "post_city" in request.POST:
+    #     region = request.POST["region"]
+    #     weight = 0
+    #     for item in cart_items:
+    #         weight = weight + item.parametr.weight * item.count
+    #
+    #     cart_info.delivery_price = delivery.calculate_delivery(weight, region)
+    #     cart_info.get_total_price()
+    #
+    #     try:
+    #         delivery_item = Delivery.objects.get(cart_id=cart_id)
+    #         delivery_item.city = region
+    #         delivery_item.price = cart_info.delivery_price
+    #         delivery_item.save()
+    #     except:
+    #         delivery_item = Delivery()
+    #         delivery_item.city = region
+    #         delivery_item.price = cart_info.delivery_price
+    #         delivery_item.cart_id = cart_id
+    #         delivery_item.save()
 
 
 
@@ -131,8 +141,6 @@ def cart_view(request, template_name="cart/cart.html"):
         #     cartItem.count = request.POST['count']
         #     cartItem.cart_id = cart_id
         #     cartItem.save()
-
-
 
     return render_to_response(template_name, locals(), context_instance=RequestContext(request))
 
@@ -161,8 +169,8 @@ def cofirmation_view(request, template_name="cart/confirmation.html"):
     else:
         return HttpResponseRedirect('/login')
 
-
     return render_to_response(template_name, locals(), context_instance=RequestContext(request))
+
 
 def payment_received(sender, **kwargs):
     """обрабатываем сигнал оплаты от платежной системы"""
@@ -179,4 +187,39 @@ def payment_received(sender, **kwargs):
     send_mail(subject, message, 'teamer777@gmail.com', [order.user.email], fail_silently=False)
     
 result_received.connect(payment_received)
+
+
+def ajax_delivery(request):
+
+    cart_id = cart.set_cart_id(request)
+    cart_items = CartItem.objects.filter(cart_id=cart_id)
+    region = cart.set_region(request)
+    weight = 0
+    cart_info = CartInfoHelper()
+    cart_info.cart_id = cart_id
+    for item in cart_items:
+        weight = weight + item.parametr.weight * item.count
+
+    cart_info.delivery_price = delivery.calculate_delivery(weight, region)
+    cart_info.get_total_price()
+
+    try:
+        delivery_item = Delivery.objects.get(cart_id=cart_id)
+        delivery_item.city = region
+        delivery_item.price = cart_info.delivery_price
+        delivery_item.save()
+    except:
+        delivery_item = Delivery()
+        delivery_item.city = region
+        delivery_item.price = cart_info.delivery_price
+        delivery_item.cart_id = cart_id
+        delivery_item.save()
+
+    data = json.dumps({
+        "region": region,
+        "delivery_price": cart_info.delivery_price,
+        "item_price": cart_info.item_price,
+        "total_price": cart_info.total_price,
+        })
+    return HttpResponse(data, content_type="application/json")
 

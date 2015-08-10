@@ -45,7 +45,7 @@
                             <i class="fa fa-chevron-down"></i>
                             ЦЕНА : <b>{{ product.price }}</b> рублей
                         </p>
-                        <p>
+                        <p class="price_select">
                             <i class="fa fa-chevron-down"></i>
                             ВЫБЕРИТЕ ВЕС
                             <select data-theme="bootstrap" name="parametr_weight" id="">
@@ -56,15 +56,13 @@
                         </p>
 
                         <form action="" method="post">{% csrf_token %}
-                            <input type="hidden" name="id" value="{{ product.id }}"/>
-                            <input type="hidden" class="parametr_price" name="parametr_price" value="{{ product.list_parametr.first.price }}"/>
-                            <p>
-                                <i class="fa fa-chevron-down"></i>
-                                Кол-во: <input size="2" type="text" name="count" value="1" />
-                            </p>
-                            <div class="btn btn-primary">
+                            <input type="hidden" class="product_id" name="id" value="{{ product.id }}"/>
+                            <input type="hidden" class="parametr_price" name="parametr_price" value="{{ parametr.price }}"/>
+                            <i class="fa fa-chevron-down"></i> Кол-во: <input size="2" class="count" type="text" name="count" value="1" />
+                            <div class="btn btn-primary ajax-submit">
                                 <i class="mdi-action-add-shopping-cart"></i>
-                                <input type="submit" class="hidden_style" value="Добавить в корзину" />
+{#                                    <input type="submit" class="hidden_style" value="Добавить" />#}
+                                Добавить
                             </div>
                         </form>
 
@@ -72,6 +70,26 @@
                     </div>
             {% endfor %}
         </div>
+    </div>
+
+
+    <div id="complete-dialog" class="modal fade" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">Поздравляем</h4>
+          </div>
+          <div class="modal-body">
+            <p>
+                Товар добавлен в корзину.
+            </p>
+          </div>
+          <div class="modal-footer">
+              <a href="/cart/" class="btn btn-primary"> Перейти в корзину</a>
+          </div>
+        </div>
+      </div>
     </div>
 
 {% endblock %}
@@ -92,6 +110,29 @@
             $(this).parents(".product").children("form").children(".parametr_price").val(price);
 {#            console.log(test);#}
         });
+
+
+        $(".ajax-submit").on("click", function(){
+            var csrftoken = $.cookie('csrftoken');
+            var price = $(this).parents(".product").children(".price_select").children(".combo-select").children(".combo-dropdown").children(".option-selected").attr('data-value');
+            var product_id = $(this).parents("form").children(".product_id").val();
+            var count = $(this).parents("form").children(".count").val();
+            console.log(price);
+            console.log(product_id);
+            $.post(
+                "/ajax-cart/",
+                {
+                    csrfmiddlewaretoken: csrftoken,
+                    parametr_price: price,
+                    id: product_id,
+                    count: count
+                },
+                onAjaxSuccess
+            );
+            function onAjaxSuccess(data) {
+                $("#complete-dialog").modal();
+            }
+        });
 	});
 </script>
 
@@ -99,10 +140,14 @@
     $(function(){
         $(window).scroll(function() {
             var top = $(document).scrollTop();
-            if (top < 70)
+            if (top < 250) {
                 $(".sidebar").css({top: '0', position: 'relative'});
-            else
-                $(".sidebar").css({top: '75px', position: 'fixed'});
+                $(".cart_menu").css({top: '0', position: 'relative'});
+                }
+            else {
+                $(".sidebar").css({top: '115px', position: 'fixed'});
+                $(".cart_menu").css({top: '75px', position: 'fixed'});
+                }
         });
     });
 </script>

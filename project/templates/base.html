@@ -60,6 +60,9 @@
                     <div class="row">
 
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+
+                            {% cart_menu request %}
+
                             <div class="sidebar">
                                 <h2>Список Категорий</h2>
                                 <ul>
@@ -170,10 +173,14 @@
                 $(function(){
                     $(window).scroll(function() {
                         var top = $(document).scrollTop();
-                        if (top < 70)
+                        if (top < 75) {
                             $(".sidebar").css({top: '0', position: 'relative'});
-                        else
-                            $(".sidebar").css({top: '75px', position: 'fixed'});
+                            $(".cart_menu").css({top: '0', position: 'relative'});
+                            }
+                        else {
+                            $(".sidebar").css({top: '115px', position: 'fixed'});
+                            $(".cart_menu").css({top: '75px', position: 'fixed'});
+                            }
                     });
                 });
             </script>

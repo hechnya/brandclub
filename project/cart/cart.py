@@ -23,3 +23,15 @@ def del_session_cart_id(request):
     if request.session.get('cart_id', '') != '':
         del request.session['cart_id']
 
+
+def get_region(request):
+    if request.session.get('region', '') == '':
+        request.session['region'] = 'МОСКВА'
+
+    return request.session['region']
+
+
+def set_region(request):
+    request.session['region'] = request.POST['region']
+
+    return request.session['region']

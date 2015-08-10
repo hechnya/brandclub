@@ -8,5 +8,6 @@ urlpatterns = patterns('project.cart.views',
     # Главная страница
     url(r'cart/$', "cart_view"),
     url(r'confirmation/$', "cofirmation_view"),
+    url(r'^ajax-delivery/$', 'ajax_delivery'),
 
 )
