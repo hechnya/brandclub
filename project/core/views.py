@@ -189,8 +189,10 @@ def robots_view(request):
 def ajax_cart(request):
     add_to_cart(request)
     global_quantity = 0
+    product = Product.objects.get(id=request.POST["id"])
     data = json.dumps({
-        "global_quantity": global_quantity
+        "global_quantity": global_quantity,
+        "product_name": u"%s" % product.name
         })
     return HttpResponse(data, content_type="application/json")
 
@@ -205,7 +207,15 @@ def fail_views(request, template_name="robokassa/fail.html"):
     return render_to_response(template_name, locals(), context_instance=RequestContext(request))
 
 
+def mail_view(request, template_name="core/email.html"):
+    cart_id = "V7I2OqalpUAf1MnKa2q2Km9DxyM2QHYOqVyZsOhyA5VgfyIYt7"
+    order = Order.objects.get(cart_id=cart_id)
+    cart_items = CartItem.objects.filter(cart_id=cart_id)
+    name = request.user.get_full_name()
+    price = order.total_price()
+    absolut_link = 'http://127.0.0.1:8000'
 
+    return render_to_response(template_name, locals(), context_instance=RequestContext(request))
 
 
 

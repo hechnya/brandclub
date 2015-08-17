@@ -14,6 +14,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from robokassa.forms import RobokassaForm
 from robokassa.signals import result_received
 import json
+from django.template.loader import render_to_string
 
 from django.contrib.sessions.models import Session
 
@@ -145,7 +146,7 @@ def cart_view(request, template_name="cart/cart.html"):
     return render_to_response(template_name, locals(), context_instance=RequestContext(request))
 
 
-def cofirmation_view(request, template_name="cart/confirmation.html"):
+def confirmation_view(request, template_name="cart/confirmation.html"):
     # получить  пользователя
     # нужно получить заказ
     # нужно получить доставку
@@ -163,11 +164,32 @@ def cofirmation_view(request, template_name="cart/confirmation.html"):
                    })
 
             order.save()
-        else:
-            return HttpResponseRedirect('/')
+        # else:
+        #     if request.method == 'POST' and "mail" in request.POST:
+        #         cart_id = request.POST['cart_id']
+        #         order = Order.objects.get(cart_id=cart_id)
+        #         items = CartItem.objects.filter(cart_id=cart_id)
+        #         context_dict = {
+        #             'name': request.user.get_full_name(),
+        #             'cart_items': items,
+        #             'price': order.total_price(),
+        #         }
+        #
+        #
+        #         subject = u'Супер письмо'
+        #         message = render_to_string(
+        #             'core/email.html', context_dict)
+        #
+        #         from_email = 'test@mail.ru'
+        #         to = "hechnya@mail.ru"
+        #         msg = EmailMultiAlternatives(subject, message, from_email, [to])
+        #         msg.content_subtype = "html"
+        #         msg.send()
+        #     return HttpResponseRedirect('/')
 
     else:
         return HttpResponseRedirect('/login')
+
 
     return render_to_response(template_name, locals(), context_instance=RequestContext(request))
 
@@ -185,6 +207,25 @@ def payment_received(sender, **kwargs):
     subject = u'Заказ на kastoreum.ru%s' % order.user.first_name
     message = u'Номер заказа %s \n Спасибо, %s! \n Ваша заявка принята! ' % (order.id, order.user.first_name,)
     send_mail(subject, message, 'teamer777@gmail.com', [order.user.email], fail_silently=False)
+
+    cart_id = order.cart_id
+    items = CartItem.objects.filter(cart_id=cart_id)
+    context_dict = {
+        'name': order.user.get_full_name(),
+        'cart_items': items,
+        'price': order.total_price(),
+    }
+
+
+    subject = u'Супер письмо'
+    message = render_to_string(
+        'core/email.html', context_dict)
+
+    from_email = 'test@mail.ru'
+    to = "hechnya@mail.ru"
+    msg = EmailMultiAlternatives(subject, message, from_email, [to])
+    msg.content_subtype = "html"
+    msg.send()
     
 result_received.connect(payment_received)
 
