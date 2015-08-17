@@ -16,6 +16,8 @@ from robokassa.signals import result_received
 import json
 from django.template.loader import render_to_string
 
+from project.settings import ABSOLUT_LINK
+
 from django.contrib.sessions.models import Session
 
 
@@ -214,6 +216,7 @@ def payment_received(sender, **kwargs):
         'name': order.user.get_full_name(),
         'cart_items': items,
         'price': order.total_price(),
+        'absolut_link': ABSOLUT_LINK
     }
 
 
