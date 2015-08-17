@@ -19,7 +19,7 @@ urlpatterns = patterns('project.core.views',
     url(r'^order/(?P<id>[-\w]+)/$', 'order_view'),
 
     url(r'^ajax-cart/$', 'ajax_cart'),
-
+    url(r'^mail/$', 'mail_view'),
 
 
 
