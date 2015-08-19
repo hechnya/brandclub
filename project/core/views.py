@@ -192,8 +192,11 @@ def ajax_cart(request):
     product = Product.objects.get(id=request.POST["id"])
     data = json.dumps({
         "global_quantity": global_quantity,
-        "product_name": u"%s" % product.name
-        })
+        "product_name": u"%s" % product.name,
+        "product_image": u"/media/%s" % product.get_image().image,
+        "description": u"%s" % product.description,
+        "weight": u"%s" % product.paramemtr()
+    })
     return HttpResponse(data, content_type="application/json")
 
 
