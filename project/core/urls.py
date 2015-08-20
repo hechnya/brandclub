@@ -9,8 +9,8 @@ urlpatterns = patterns('project.core.views',
     # Главная страница
     url(r'^$', 'indexView'),
     url(r'^product/(?P<slug>[-\w]+)/$', 'product_view'),
-    url(r'^page/(?P<slug>[-\w]+)/$', 'page_view') ,
-    url(r'^article/(?P<id>[-\w]+)/$' , 'article_view'),
+    url(r'^page/(?P<slug>[-\w]+)/$', 'page_view'),
+    url(r'^article/(?P<id>[-\w]+)/$', 'article_view'),
     url(r'^category/(?P<slug>[-\w]+)/$', 'category_view'),
     url(r'^products/$', 'products_view'),
     url(r'^article-add/$', 'article_add_view'),
@@ -20,6 +20,7 @@ urlpatterns = patterns('project.core.views',
 
     url(r'^ajax-cart/$', 'ajax_cart'),
     url(r'^mail/$', 'mail_view'),
+    url(r'^search/$', 'search_view'),
 
 
 

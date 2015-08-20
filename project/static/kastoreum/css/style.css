@@ -268,3 +268,12 @@ button.close:hover {
     padding: 10px;
     background-color: #009963;
 }
+
+.adress {
+    float: right;
+    font-size: 19px;
+}
+
+.footer-wrapper img{
+    width: 100%;
+}
