@@ -145,7 +145,7 @@
 
 <script>
     $(function(){
-        if (window.matchMedia("(min-width: 1000px)").matches) {
+        if (window.matchMedia("(min-width: 700px)").matches) {
             $(window).scroll(function() {
             var top = $(document).scrollTop();
             if (top < 250) {
@@ -158,7 +158,7 @@
                 }
         });
         } else {
-
+            console.log('< 700 px');
         }
 
     });
