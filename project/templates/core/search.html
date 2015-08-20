@@ -1,31 +1,9 @@
 {% extends "base.html" %}
-{% load header_tags %}
 {% load static from staticfiles %}
 
-{% block header %}
-    {% top_menu request %}
-        <!-- Slider main container -->
-{% endblock %}
-
-{% block swiper %}
-    <div class="swiper-container">
-        <!-- Additional required wrapper -->
-        <div class="swiper-wrapper">
-            <!-- Slides -->
-            {% for slide in slides %}
-                <div class="swiper-slide"><img src="/media/{{ slide.image }}" alt=""/></div>
-            {% endfor %}
-{#            <div class="swiper-slide"><img src="{% static 'kastoreum/images/peizagh.jpg' %}" alt=""/></div>#}
-
-{#            <div class="swiper-slide"><img src="{% static 'kastoreum/images/peizagh.jpg' %}" alt=""/></div>#}
-        </div>
-        <!-- If we need pagination -->
-        <div class="swiper-pagination"></div>
-
-        <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-    </div>
+{% block head %}
+    <title>Товары народной медицины| народная аптека для здоровья kastoreum.ru</title>
+    <meta name="description"  content="Товары народной медицины бобровая струя, медвежий жир, барсучий жир, медвежья желчь, мускус кабарги, мумие"/>
 {% endblock %}
 
 {% block content %}
@@ -36,19 +14,20 @@
 
                     <div class="col-md-4 product">
                         <a href="/product/{{ product.slug }}"><img style="" src="/media/{{ product.get_image.image }}" alt=""/></a>
+{#                        <p>{{ product.image.image }}</p>#}
                         <h3>{{ product.name }}</h3>
-                        <p class="description_product">{{ product.description|truncatewords:12 }}</p>
+                        <p class="description_product">{{ product.description|truncatewords:12}}</p>
                         <p>
                             <a class="" href="/product/{{ product.slug }}">подробнее о товаре</a>
                         </p>
                         <p class="product_price">
                             <i class="fa fa-chevron-down"></i>
-                            ЦЕНА : <b>{{ product.price }}</b> рублей
+                            ЦЕНА : <b>{{ product.price }}</b>  рублей
                         </p>
-                        <p class="price_select">
+                         <p class="price_select">
                             <i class="fa fa-chevron-down"></i>
-                            ВЫБЕРИТЕ ВЕС
-                            <select data-theme="bootstrap" name="parametr_weight" id="">
+                             ВЫБЕРИТЕ ВЕС
+                             <select data-theme="bootstrap" name="parametr_weight" id="">
                                 {% for parametr in product.list_parametr %}
                                     <option value="{{ parametr.price }}">{{ parametr.weight }} гр </option>
                                 {% endfor %}
@@ -59,20 +38,17 @@
                             <input type="hidden" class="product_id" name="id" value="{{ product.id }}"/>
                             <input type="hidden" class="parametr_price" name="parametr_price" value="{{ parametr.price }}"/>
                             <i class="fa fa-chevron-down"></i> Кол-во: <input size="2" class="count" type="text" name="count" value="1" />
-                            <div class="btn btn-primary ajax-submit">
-                                <i class="mdi-action-add-shopping-cart"></i>
+                                <div class="btn btn-primary ajax-submit">
+                                    <i class="mdi-action-add-shopping-cart"></i>
 {#                                    <input type="submit" class="hidden_style" value="Добавить" />#}
-                                Добавить
-                            </div>
+                                    Добавить
+                                </div>
                         </form>
-
-{#                        <a class="btn btn-success" href="/product/{{ product.slug }}">подробнее</a>#}
                     </div>
+
             {% endfor %}
         </div>
     </div>
-
-
     <div id="complete-dialog" class="modal fade" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -84,7 +60,7 @@
                 <img src="" alt="" width="200" style="float:left;">
                 <h2></h2>
                 <p class="description_confirm"></p>
-                <p class="weight_confirm"></p>гр.
+                <p class="weight_confirm"></p>
           </div>
           <div class="modal-footer">
               <a href="/cart/" class="btn btn-primary"> Перейти в корзину</a>
@@ -99,7 +75,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-
 		$(".fancybox").fancybox();
 
         $('select').comboSelect({});
@@ -145,45 +120,19 @@
 
 <script>
     $(function(){
-        if (window.matchMedia("(min-width: 1000px)").matches) {
-            $(window).scroll(function() {
-                var top = $(document).scrollTop();
-                if (top < 250) {
-                    $(".sidebar").css({top: '0', position: 'relative'});
-                    $(".cart_menu").css({top: '0', position: 'relative'});
-                    }
-                else {
-                    $(".sidebar").css({top: '130px', position: 'fixed'});
-                    $(".cart_menu").css({top: '75px', position: 'fixed'});
-                    }
-            });
-        }
-
+        $(window).scroll(function() {
+            var top = $(document).scrollTop();
+            if (top < 70) {
+                $(".sidebar").css({top: '0', position: 'relative'});
+                $(".cart_menu").css({top: '0', position: 'relative'});
+                }
+            else {
+                $(".sidebar").css({top: '130px', position: 'fixed'});
+                $(".cart_menu").css({top: '75px', position: 'fixed'});
+                }
+        });
     });
 </script>
 
+
 {% endblock %}
-
-
-
-{#{% block articles %}#}
-{#    <div class="col-md-12">#}
-{#        {% for article in articles %}#}
-{#            <img src="/media/{{ article.image.url }}" alt=""/>#}
-{#            <h4>{{ article.name }} - {{ article.date }}</h4>#}
-{#            <p>{{ article.text }}</p>#}
-{#             <a href="/article/{{ article.id }}">далее</a>#}
-{##}
-{#        {% endfor %}#}
-{#    </div>#}
-{#    <div class="col-md-12">#}
-{#        {% for page in pages  %}#}
-{#            <img src="/media/{{ page.image.url }}" alt=""/>#}
-{#            <h4>{{ page.name }} </h4>#}
-{#            <p>{{ page.page }}</p>#}
-{#            <a href="/page/{{ page.slug }}">подробнее</a>#}
-{##}
-{#        {% endfor %}#}
-{#    </div>#}
-{#{% endblock %}#}
-

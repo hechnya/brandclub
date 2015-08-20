@@ -221,4 +221,10 @@ def mail_view(request, template_name="core/email.html"):
     return render_to_response(template_name, locals(), context_instance=RequestContext(request))
 
 
+def search_view(request, template_name="core/search.html"):
+    products = Product.objects.filter(name__icontains=request.GET['text'])
+
+    return render_to_response(template_name, locals(), context_instance=RequestContext(request))
+
+
 
