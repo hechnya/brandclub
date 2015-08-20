@@ -208,9 +208,10 @@
 
 <script>
     $(function(){
-        $(window).scroll(function() {
+        if (window.matchMedia("(min-width: 1000px)").matches) {
+            $(window).scroll(function() {
             var top = $(document).scrollTop();
-            if (top < 70) {
+            if (top < 250) {
                 $(".sidebar").css({top: '0', position: 'relative'});
                 $(".cart_menu").css({top: '0', position: 'relative'});
                 }
@@ -219,6 +220,9 @@
                 $(".cart_menu").css({top: '75px', position: 'fixed'});
                 }
         });
+        } else {
+        }
+
     });
 </script>
 
