@@ -33,6 +33,7 @@ DEBUG = True
 ADMIN_EMAIL = 'hechnya@mail.ru'
 ALLOWED_HOSTS = []
 
+YANDEX_MAPS_API_KEY="ALSB2FUBAAAAuT1HFQIA05P0YDsaQFcpdBUlKV5eo0w2lyoAAAAAAAAAAAAYL7umcMccsI8_av_IphC-iwwgdA=="
 
 
 # Application definition
@@ -57,6 +58,7 @@ INSTALLED_APPS = (
     'authentication',
     'robokassa',
     'breadcrumbs',
+    'yandex_maps',
 
 )
 
