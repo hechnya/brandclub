@@ -1,3 +1,5 @@
+@import url("animate.css");
+
 /*наши стили*/
 .content-wrapper a {
     color: #009963;
@@ -283,3 +285,14 @@ button.close:hover {
     color: rgba(255, 255, 255, 0.84);
     border-radius: 6px;
 }
+
+.search:hover {
+    background-color: #00b778;
+    color: rgba(255, 255, 255, 0.84);
+    border-radius: 6px;
+}
+
+.adress {
+    color: #009963;
+}
+

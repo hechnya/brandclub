@@ -4,7 +4,7 @@ register = template.Library()
 from project.core.models import Category
 from project.cart.models import CartInfoHelper
 from project.cart import cart
-
+from yandex_maps import api
 
 def top_menu(context, request):
 

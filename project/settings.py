@@ -33,6 +33,7 @@ DEBUG = True
 ADMIN_EMAIL = 'hechnya@mail.ru'
 ALLOWED_HOSTS = []
 
+YANDEX_MAPS_API_KEY = 'AC_11VUBAAAAvftKEAIAzAAyejDF33R5O3jkGX7CQvvN54IAAAAAAAAAAACCfA7xoDR4Q5RU9Ca3oe8P7Nf35w=='
 
 # Application definition
 
@@ -56,6 +57,7 @@ INSTALLED_APPS = (
     'authentication',
     'robokassa',
     'breadcrumbs',
+    'yandex_maps',
 
 )
 
@@ -139,6 +141,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
+
 
 STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, "static")
