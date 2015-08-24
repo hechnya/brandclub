@@ -297,3 +297,7 @@ button.close:hover {
     color: #000000;
     padding: 0px 35px;
 }
+
+.form-control[placeholder] {
+    color: #333;
+}
