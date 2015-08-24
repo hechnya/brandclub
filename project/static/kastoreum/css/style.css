@@ -282,13 +282,13 @@ button.close:hover {
 }
 
 .search {
-    background-color: #009963;
+    background-color: #009963!important;
     color: rgba(255, 255, 255, 0.84);
     border-radius: 6px!important;
 }
 
 .search:hover {
-    background-color: #00b778;
+    background-color: #00b778!important;
     color: rgba(255, 255, 255, 0.84);
     border-radius: 6px;
 }
