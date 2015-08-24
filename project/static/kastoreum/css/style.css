@@ -284,13 +284,16 @@ button.close:hover {
 .search {
     background-color: #009963;
     color: rgba(255, 255, 255, 0.84);
-    border-radius: 6px;
+    border-radius: 6px!important;
 }
 
 .search:hover {
     background-color: #00b778;
     color: rgba(255, 255, 255, 0.84);
     border-radius: 6px;
+}
+.navbar .navbar-form_search {
+    margin-top: 6px!important;
 }
 
 .adress {
