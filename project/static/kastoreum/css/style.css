@@ -281,19 +281,16 @@ button.close:hover {
     width: 100%;
 }
 
-.search {
-    background-color: #009963!important;
-    color: rgba(255, 255, 255, 0.84);
-    border-radius: 6px!important;
-}
-
-.search:hover {
-    background-color: #00b778!important;
+.btn.search.btn-primary:not(.btn-link):not(.btn-flat) {
+    background-color: #009963;
     color: rgba(255, 255, 255, 0.84);
     border-radius: 6px;
 }
-.navbar .navbar-form_search {
-    margin-top: 6px!important;
+
+.btn.search.btn-primary:not(.btn-link):not(.btn-flat):hover {
+    background-color: #00b778;
+    color: rgba(255, 255, 255, 0.84);
+    border-radius: 6px;
 }
 
 .adress {
@@ -305,6 +302,10 @@ button.close:hover {
     color: #333;
 }
 
-.navbar .navbar-form {
-    margin-top: 6px!important;
+#navbar-example.navbar .navbar-form {
+    margin-top: 6px;
+}
+
+.input_search {
+    padding: 5px;
 }
