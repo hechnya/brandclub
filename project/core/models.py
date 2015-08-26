@@ -58,7 +58,7 @@ class Product(models.Model):
     category = models.ManyToManyField(Category)
     article = models.OneToOneField(Article, null=True, blank=True)
 
-    meta_title = models.CharField(max_length=60, blank=True)
+    meta_title = models.CharField(max_length=65, blank=True)
     meta_description = models.CharField(max_length=150, blank=True)
 
     class Meta:
