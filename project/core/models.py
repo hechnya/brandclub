@@ -51,6 +51,7 @@ class Product(models.Model):
     name = models.CharField(max_length=150)
     slug = models.SlugField(max_length=150, unique=True, blank=False)
     description = models.TextField()
+    characteristics = models.TextField()
     video = models.CharField(max_length=200, blank=True, null=True)
     # price = models.IntegerField()
     # weight = models.IntegerField()
