@@ -5,7 +5,7 @@
     {% if product.meta_title != "" %}
         <title>{{ product.meta_title }} | аптека здоровья kastoreum.ru</title>
     {% else %}
-        <title>{{ product.name }} | аптека здоровья kastoreum.ru</title>
+        <title>{{ product.name }}</title>
     {% endif %}
     {% if product.meta_description != "" %}
         <meta name="description" content="{{ product.meta_description }}"/>
@@ -92,7 +92,7 @@
                     <div class="row">
                         <div class="col-md-6 delivery-left ">
                             <div>
-                                <a href="/page/dostavka"> Быстрая доставка</a>
+                                <a href="/page/dostavka/"> Быстрая доставка</a>
                             </div>
                             <div>
                                 Свой склад
