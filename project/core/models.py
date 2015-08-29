@@ -53,6 +53,7 @@ class Product(models.Model):
     description = models.TextField()
     # characteristics = models.TextField()
     video = models.CharField(max_length=200, blank=True, null=True)
+    characters = models.TextField()
     # price = models.IntegerField()
     # weight = models.IntegerField()
     category = models.ManyToManyField(Category)
