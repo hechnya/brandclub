@@ -92,7 +92,7 @@ class Migration(migrations.Migration):
                 ('slug', models.SlugField(unique=True, max_length=150)),
                 ('description', models.TextField()),
                 ('video', models.CharField(max_length=200, null=True, blank=True)),
-                ('meta_title', models.CharField(max_length=60, blank=True)),
+                ('meta_title', models.CharField(max_length=65, blank=True)),
                 ('meta_description', models.CharField(max_length=150, blank=True)),
                 ('article', models.OneToOneField(null=True, blank=True, to='core.Article')),
                 ('category', models.ManyToManyField(to='core.Category')),
