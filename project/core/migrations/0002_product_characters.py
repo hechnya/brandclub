@@ -13,8 +13,8 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='product',
-            name='characteristics',
-            field=models.TextField(default=1),
+            name='characters',
+            field=models.TextField(default=''),
             preserve_default=False,
         ),
     ]

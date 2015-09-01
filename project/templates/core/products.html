@@ -13,7 +13,7 @@
             {% for product in products %}
 
                     <div class="col-md-4 product">
-                        <a href="/product/{{ product.slug }}/"><img style="" src="/media/{{ product.get_image.image }}" alt=""/></a>
+                        <a href="/product/{{ product.slug }}/"><img style="" src="/media/{{ product.get_image.image }}" alt="{{ product.name }}"/></a>
 {#                        <p>{{ product.image.image }}</p>#}
                         <h3>{{ product.name }}</h3>
                         <p class="description_product">{{ product.description|truncatewords:12}}</p>
