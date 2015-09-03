@@ -309,3 +309,7 @@ button.close:hover {
 .input_search {
     padding: 5px;
 }
+
+.footer-wrapper img {
+    width: 260px;
+}
