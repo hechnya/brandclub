@@ -175,23 +175,26 @@
                     autoplayDisableOnInteraction: false
                 });
             </script>
+{% block page_js %}
+<script>
+    $(function(){
+        if (window.matchMedia("(min-width: 1000px)").matches) {
+            $(window).scroll(function() {
+            var top = $(document).scrollTop();
+            if (top < 250) {
+                $(".sidebar").css({top: '0', position: 'relative'});
+                $(".cart_menu").css({top: '0', position: 'relative'});
+                }
+            else {
+                $(".sidebar").css({top: '130px', position: 'fixed'});
+                $(".cart_menu").css({top: '75px', position: 'fixed'});
+                }
+        });
+        } else {
+        }
 
-        {% block page_js %}
-            <script>
-                $(function(){
-                    $(window).scroll(function() {
-                        var top = $(document).scrollTop();
-                        if (top < 75) {
-                            $(".sidebar").css({top: '0', position: 'relative'});
-                            $(".cart_menu").css({top: '0', position: 'relative'});
-                            }
-                        else {
-                            $(".sidebar").css({top: '130px', position: 'fixed'});
-                            $(".cart_menu").css({top: '75px', position: 'fixed'});
-                            }
-                    });
-                });
-            </script>
+    });
+</script>
 {#            <script type="text/javascript" src="{% static "kastoreum/js/plugin/appear/jquery.appear.js" %}"></script>#}
 {#            <script type="text/javascript" src="{% static "kastoreum/js/plugin/count/jquery.countTo.js" %}"></script>#}
 {#            <script type="text/javascript" src="{% static "kastoreum/js/plugin/mediaelement/mediaelement-and-player.js" %}"></script>#}
@@ -207,7 +210,7 @@
 {#            <script type="text/javascript" src="{% static "kastoreum/js/grid-gallery.js" %}"></script>#}
 {#            <script type="text/javascript" src="{% static "kastoreum/js/custom.js" %}"></script>#}
 
-        {% endblock %}
+{% endblock %}
             <script type="text/javascript">
                 (function() {
                     var script = document.createElement('script');
