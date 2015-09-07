@@ -32,7 +32,7 @@ class Category(MPTTModel):
 
 class Article(models.Model):
     name = models.CharField(max_length=200)
-    text = models.TextField()
+    text = RichTextField()
     date = models.DateField(auto_now_add=True)
 
     meta_title = models.CharField(max_length=60, blank=True)
@@ -130,7 +130,7 @@ class ArticleImage(models.Model):
 class Page(models.Model):
     slug = models.SlugField(max_length=150, unique=False, blank=False)
     name = models.CharField(max_length=2000)
-    page = models.TextField()
+    page = RichTextField()
 
     meta_title = models.CharField(max_length=60, blank=True)
     meta_description = models.CharField(max_length=150, blank=True)
