@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from project.core.models import Product, Article, Page, ProductImage, ArticleImage, PageImage, Category, Slide, ProductParametr
+from django import forms
+from django.contrib import admin
+from ckeditor.widgets import CKEditorWidget
 
 
 class ProductImageAdmin(admin.StackedInline):
@@ -19,6 +22,7 @@ class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',), }
 
 
+
 # Register your models here.
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Article)
@@ -29,5 +33,6 @@ admin.site.register(PageImage)
 admin.site.register(Category)
 admin.site.register(Slide)
 admin.site.register(ProductParametr)
+
 
 

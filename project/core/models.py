@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
+from django.db import models
+from ckeditor.fields import RichTextField
 
 # class Parent(models.Model):
 #     name = models.CharField(max_length=40)
@@ -50,7 +52,7 @@ class Article(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=150)
     slug = models.SlugField(max_length=150, unique=True, blank=False)
-    description = models.TextField()
+    description = RichTextField()
     # characteristics = models.TextField()
     video = models.CharField(max_length=200, blank=True, null=True)
     characters = models.TextField()
@@ -65,6 +67,7 @@ class Product(models.Model):
     class Meta:
         verbose_name = u'Продукты'
         verbose_name_plural = u'Продукты'
+
 
     def __unicode__(self):
         return self.name

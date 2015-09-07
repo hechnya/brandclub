@@ -156,6 +156,7 @@ CKEDITOR_UPLOAD_PATH = '/media/uploads'
 
 THUMBNAIL_DEBUG = True
 
+
 # THUMBNAIL_PROCESSORS = (
 #     'image_cropping.thumbnail_processors.crop_corners',
 # ) + thumbnail_settings.THUMBNAIL_PROCESSORS
