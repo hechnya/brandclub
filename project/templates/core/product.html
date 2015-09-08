@@ -34,7 +34,7 @@
 
                 <!-- Tab panes -->
                 <div class="tab-content">
-                  <div class="tab-pane active" id="description">{{ product.description }}</div>
+                  <div class="tab-pane active" id="description">{{ product.description|safe }}</div>
                   <div class="tab-pane" id="characters">{{ product.characters }}</div>
                   <div class="tab-pane" id="video">
                       <iframe width="408" height="270" src="https://www.youtube.com/embed/{{ product.video }}" frameborder="0" allowfullscreen></iframe>

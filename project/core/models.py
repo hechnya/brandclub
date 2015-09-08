@@ -4,9 +4,6 @@ from mptt.models import MPTTModel, TreeForeignKey
 from django.db import models
 from ckeditor.fields import RichTextField
 
-# class Parent(models.Model):
-#     name = models.CharField(max_length=40)
-#     date = models.DateField(auto_now_add=True)
 
 class Category(MPTTModel):
     name = models.CharField(max_length=200)
