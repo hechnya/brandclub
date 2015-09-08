@@ -42,3 +42,76 @@
     </div>
 
 {% endblock %}
+
+{% block page_js %}
+    <script type="text/javascript" src="{% static "kastoreum/js/form_validate.js" %}"></script>
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".fancybox").fancybox();
+        $('select').comboSelect();
+
+{#        пересчитываем стоимость доставки и корзины при загрузи страницы#}
+        var csrftoken = $.cookie('csrftoken');
+        var region = $(".region").html();
+        $.post(
+            "/ajax-delivery/",
+            {
+                csrfmiddlewaretoken: csrftoken,
+                region: region
+            },
+            onAjaxSuccess
+        );
+        function onAjaxSuccess(data) {
+            $(".item_price").html(data.item_price+" РУБ");
+            $(".region").html(data.region );
+            $(".delivery_price").html(data.delivery_price +" РУБ");
+            $(".total_price").html(data.total_price+" РУБ");
+            $("#id_city").val(data.region);
+        }
+
+{#        пересчитать доставку и стоимость по клику#}
+        $(".combo-dropdown li").on("click", function (){
+            var csrftoken = $.cookie('csrftoken');
+            var region = $(this).attr('data-value');
+            $.post(
+                "/ajax-delivery/",
+                {
+                    csrfmiddlewaretoken: csrftoken,
+                    region: region
+                },
+                onAjaxSuccess
+            );
+            function onAjaxSuccess(data) {
+                $(".item_price").html(data.item_price+" РУБ");
+                $(".region").html(data.region );
+                $(".delivery_price").html(data.delivery_price + " РУБ");
+                $(".total_price").html(data.total_price+" РУБ");
+                $("#id_city").val(data.region);
+            }
+        });
+
+	});
+</script>
+
+<script>
+    $(function(){
+        if (window.matchMedia("(min-width: 1000px)").matches) {
+            $(window).scroll(function() {
+            var top = $(document).scrollTop();
+            if (top < 50) {
+                $(".sidebar").css({top: '0', position: 'relative'});
+                $(".cart_menu").css({top: '0', position: 'relative'});
+                }
+            else {
+                $(".sidebar").css({top: '130px', position: 'fixed'});
+                $(".cart_menu").css({top: '75px', position: 'fixed'});
+                }
+        });
+        } else {
+        }
+
+    });
+</script>
+{% endblock %}
