@@ -16,7 +16,7 @@
                         <a href="/product/{{ product.slug }}/"><img style="" src="/media/{{ product.get_image.image }}" alt="{{ product.name }}"/></a>
 {#                        <p>{{ product.image.image }}</p>#}
                         <h3>{{ product.name }}</h3>
-                        <p class="description_product">{{ product.description|truncatewords:"12"|safe }}</p>
+                        <div class="description_product">{{ product.description|truncatewords:"12"|safe }}</div>
                         <p>
                             <a class="" href="/product/{{ product.slug }}/">подробнее о товаре</a>
                         </p>
