@@ -130,18 +130,19 @@ input.hidden_style{
 
 
 body.super-body {
-    background-color: #FFFFFF;
-    /*background-color: #f2f2f2;*/
+    /*background-color: #FFFFFF;*/
+    background-color: #f2f2f2;
     padding-top: 63px;
 
 }
 
 .content-wrapper{
     padding: 50px 0px;
+    background-color: #FFFFFF;
 }
 
 .footer-wrapper{
-    background-color: #f6f6f6;
+    background-color: #f2f2f2;
     padding: 0px 0px;
 
 }
