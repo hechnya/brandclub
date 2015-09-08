@@ -54,7 +54,7 @@
                 {% if product.article %}
                     <div class="list-group-separator separator"></div>
                     <p class="article">
-                        {{ product.article.text |truncatewords:30|safe }}
+                        {{ product.article.text |truncatewords:"12"|safe }}
                         <a href="/article/{{ product.article.id }}/">подробнее</a>
                     </p>
                 {% endif %}
