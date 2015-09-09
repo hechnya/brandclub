@@ -84,7 +84,7 @@
                 <img src="" alt="" width="200" style="float:left;">
                 <h2></h2>
                 <p class="description_confirm"></p>
-                <p class="weight_confirm"></p>гр.
+                <p class="weight_confirm"></p>
           </div>
           <div class="modal-footer">
               <a href="/cart/" class="btn btn-primary"> Перейти в корзину</a>
@@ -135,8 +135,8 @@
                 console.log(data);
                 $("#complete-dialog .modal-body h2").html(data.product_name);
                 $("#complete-dialog .modal-body img").attr('src', data.product_image);
-                $("#complete-dialog .modal-body .description_confirm").html(data.description);
-                $("#complete-dialog .modal-body .weight_confirm").html(data.weight);
+{#                $("#complete-dialog .modal-body .description_confirm").html(data.description);#}
+{#                $("#complete-dialog .modal-body .weight_confirm").html(data.weight);#}
                 $("#complete-dialog").modal();
             }
         });

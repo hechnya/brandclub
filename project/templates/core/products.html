@@ -110,8 +110,8 @@
                 console.log(data);
                 $("#complete-dialog .modal-body h2").html(data.product_name);
                 $("#complete-dialog .modal-body img").attr('src', data.product_image);
-                $("#complete-dialog .modal-body .description_confirm").html(data.description);
-                $("#complete-dialog .modal-body .weight_confirm").html(data.weight);
+{#                $("#complete-dialog .modal-body .description_confirm").html(data.description);#}
+{#                $("#complete-dialog .modal-body .weight_confirm").html(data.weight);#}
                 $("#complete-dialog").modal();
             }
         });
