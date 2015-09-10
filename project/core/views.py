@@ -116,7 +116,7 @@ def category_view(request, slug, template_name="core/category.html"):
     request.breadcrumbs(category.name, request.path_info)
 
     for product in products:
-        product.list_parametr = ProductParametr.objects.filter(product=product)
+        product.list_parametr = get_object_or_404(product=product)
 
     if request.method == 'POST':
         add_to_cart(request)
