@@ -88,7 +88,7 @@ def product_view(request, slug, template_name="core/product.html"):
 
 def page_view(request, slug, template_name="core/page.html" ):
 
-    page = Page.objects.get(slug=slug)
+    page = get_object_or_404(Page, slug=slug)
     request.breadcrumbs(page.name, request.path_info)
     try:
         page.pageimage = PageImage.objects.filter(page=page)[0]
