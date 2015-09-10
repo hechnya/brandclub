@@ -111,7 +111,7 @@ def article_view(request, id, template_name="core/article.html"):
 
 def category_view(request, slug, template_name="core/category.html"):
 
-    category = Category.objects.get(slug=slug)
+    category = get_object_or_404(slug=slug)
     products = get_object_or_404(category=category)
     request.breadcrumbs(category.name, request.path_info)
 
