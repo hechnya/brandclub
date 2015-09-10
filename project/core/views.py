@@ -88,7 +88,7 @@ def product_view(request, slug, template_name="core/product.html"):
 
 def page_view(request, slug, template_name="core/page.html" ):
 
-    page = Page.objects.get(slug=slug)
+    page = get_object_or_404(slug=slug)
     request.breadcrumbs(page.name, request.path_info)
     try:
         page.pageimage = PageImage.objects.filter(page=page)[0]
@@ -111,7 +111,7 @@ def article_view(request, id, template_name="core/article.html"):
 
 def category_view(request, slug, template_name="core/category.html"):
 
-    category = Category.objects.get(slug=slug)
+    category = get_object_or_404(slug=slug)
     products = Product.objects.filter(category=category)
     request.breadcrumbs(category.name, request.path_info)
 
