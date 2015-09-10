@@ -69,7 +69,7 @@ def product_view(request, slug, template_name="core/product.html"):
 
     # product = Product.objects.get(slug=slug)
     product = get_object_or_404(Product, slug=slug)
-    category = product.category.all()[0]
+    category = get_object_or_404()[0]
     request.breadcrumbs([(category.name, category.url()), (product.name, request.path_info)])
     list_parametr = ProductParametr.objects.filter(product=product)
     parametr = ProductParametr.objects.get(product=product, is_main=True)
