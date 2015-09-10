@@ -69,7 +69,7 @@ def product_view(request, slug, template_name="core/product.html"):
 
     # product = Product.objects.get(slug=slug)
     product = get_object_or_404(Product, slug=slug)
-    category = get_object_or_404()[0]
+    category = product.category.all()[0]
     request.breadcrumbs([(category.name, category.url()), (product.name, request.path_info)])
     list_parametr = ProductParametr.objects.filter(product=product)
     parametr = ProductParametr.objects.get(product=product, is_main=True)
@@ -112,11 +112,11 @@ def article_view(request, id, template_name="core/article.html"):
 def category_view(request, slug, template_name="core/category.html"):
 
     category = get_object_or_404(slug=slug)
-    products = get_object_or_404(category=category)
+    products = get_object_or_404(Product, category=category)
     request.breadcrumbs(category.name, request.path_info)
 
     for product in products:
-        product.list_parametr = get_object_or_404(product=product)
+        product.list_parametr = ProductParametr.objects.filter(product=product)
 
     if request.method == 'POST':
         add_to_cart(request)
