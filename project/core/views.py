@@ -5,8 +5,10 @@ from project.cart.models import CartItem, Order, Delivery
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from project.cart import cart
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, Http404
 import json
+from django.shortcuts import get_object_or_404
+
 
 from project.settings import STATIC_ROOT
 
@@ -65,7 +67,8 @@ def indexView(request, template_name='core/index.html'):
 
 def product_view(request, slug, template_name="core/product.html"):
 
-    product = Product.objects.get(slug=slug)
+    # product = Product.objects.get(slug=slug)
+    product = get_object_or_404(Product, slug=slug)
     category = product.category.all()[0]
     request.breadcrumbs([(category.name, category.url()), (product.name, request.path_info)])
     list_parametr = ProductParametr.objects.filter(product=product)
