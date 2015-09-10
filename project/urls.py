@@ -1,3 +1,4 @@
+from django.conf import os
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
@@ -37,3 +38,9 @@ if settings.DEBUG:
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': settings.MEDIA_ROOT}),
         )
+
+# if settings.DEBUG404:
+#     urlpatterns += patterns('',
+#         (r'^static/(?P<path>.*)$', 'django.views.static.serve',
+#          {'document_root': os.path.join(os.path.dirname(__file__), 'static')} ),
+#     )

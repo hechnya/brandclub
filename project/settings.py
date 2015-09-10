@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 # from easy_thumbnails.conf import Settings as thumbnail_settings
 
-SITE_ID = 2
+SITE_ID = 1
 
 AUTH_USER_MODEL = 'authentication.Account'
 
@@ -29,9 +29,10 @@ PROJECT_PATH = os.path.abspath(os.path.dirname(__file__).decode('utf-8')).replac
 SECRET_KEY = '7j09%e0uap(m5o=3967!k7$vp*kvg7-vr8jmslft_53g$5i@%+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 ADMIN_EMAIL = 'hechnya@mail.ru'
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+DEBUG404 = True
 
 YANDEX_MAPS_API_KEY="ALSB2FUBAAAAuT1HFQIA05P0YDsaQFcpdBUlKV5eo0w2lyoAAAAAAAAAAAAYL7umcMccsI8_av_IphC-iwwgdA=="
 
