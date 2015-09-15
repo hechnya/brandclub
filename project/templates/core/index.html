@@ -36,7 +36,7 @@
 
                     <div class="col-md-4 product">
                         <a href="/product/{{ product.slug }}/"><img style="" src="/media/{{ product.get_image.image }}" alt="{{ product.name }}"/></a>
-                        <h3>{{ product.name }}</h3>
+                        <h1>{{ product.name }}</h1>
                         <p class="description_product">{{ product.description|truncatechars:"90"|safe }}</p>
                         <p>
                             <a class="" href="/product/{{ product.slug }}">подробнее о товаре</a>
