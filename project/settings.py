@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 # from easy_thumbnails.conf import Settings as thumbnail_settings
 
-SITE_ID = 1
+SITE_ID = 2
 
 AUTH_USER_MODEL = 'authentication.Account'
 
