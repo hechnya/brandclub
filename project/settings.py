@@ -34,7 +34,7 @@ DEBUG = False
 ADMIN_EMAIL = 'hechnya@mail.ru'
 ALLOWED_HOSTS = ['*']
 DEBUG404 = True
-
+#
 # DEBUG = True
 # ADMIN_EMAIL = 'hechnya@mail.ru'
 # ALLOWED_HOSTS = []
