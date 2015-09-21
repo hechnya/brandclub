@@ -14,6 +14,7 @@ from project.settings import STATIC_ROOT
 
 # Page = {}
 
+
 def add_to_cart(request):
     id = request.POST['id']
     product = Product.objects.get(id=id)
