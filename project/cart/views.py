@@ -204,11 +204,11 @@ def payment_received(sender, **kwargs):
 
     subject = u'заявка от %s' % order.user.first_name
     message = u'Номер заказа: %s \n Имя: %s \n телефон: %s' % (order.id, order.user.last_name, order.user.phone)
-    send_mail(subject, message, 'teamer777@gmail.com', [ADMIN_EMAIL], fail_silently=False)
+    send_mail(subject, message, 'halturin77@gmail.com', [ADMIN_EMAIL], fail_silently=False)
 
     subject = u'Заказ на kastoreum.ru%s' % order.user.first_name
     message = u'Номер заказа %s \n Спасибо, %s! \n Ваша заявка принята! ' % (order.id, order.user.first_name,)
-    send_mail(subject, message, 'teamer777@gmail.com', [order.user.email], fail_silently=False)
+    send_mail(subject, message, 'halturin77@gmail.com', [order.user.email], fail_silently=False)
 
     cart_id = order.cart_id
     items = CartItem.objects.filter(cart_id=cart_id)

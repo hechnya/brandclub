@@ -29,7 +29,7 @@ PROJECT_PATH = os.path.abspath(os.path.dirname(__file__).decode('utf-8')).replac
 SECRET_KEY = '7j09%e0uap(m5o=3967!k7$vp*kvg7-vr8jmslft_53g$5i@%+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-
+#
 DEBUG = False
 ADMIN_EMAIL = 'hechnya@mail.ru'
 ALLOWED_HOSTS = ['*']
@@ -169,10 +169,6 @@ THUMBNAIL_DEBUG = True
 # ) + thumbnail_settings.THUMBNAIL_PROCESSORS
 
 
-ROBOKASSA_LOGIN = 'kastoreum'
-ROBOKASSA_PASSWORD1 = 'LKJHlkvbsklcbfwe2ye2893'
-ROBOKASSA_PASSWORD2 = 'JJHHFHGD213Ksaf'
-ROBOKASSA_TEST_MODE = True
 
 
 try:
