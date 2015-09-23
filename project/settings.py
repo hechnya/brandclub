@@ -155,6 +155,8 @@ STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_ROOT = ''
 
+# FAVICON_PATH = STATIC_URL + 'kastoreum/images/favicon.ico'
+
 MEDIA_ROOT = '%s/project/media' % BASE_DIR
 
 MEDIA_URL = '/media/'
