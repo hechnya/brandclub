@@ -26,7 +26,6 @@ urlpatterns = [
     url(r'^robokassa/', include('robokassa.urls')),
     url(r'^robots.txt$', 'project.core.views.robots_view'),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-    url(r'^', include('favicon.urls')),
 
 
 ]
