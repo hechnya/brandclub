@@ -18,7 +18,6 @@ admin.autodiscover()
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^ckeditor/', include('ckeditor.urls')),
-
     url(r'^', include('project.core.urls')),
     url(r'^', include('project.cart.urls')),
     url(r'^', include('authentication.urls')),
@@ -27,6 +26,7 @@ urlpatterns = [
     url(r'^robokassa/', include('robokassa.urls')),
     url(r'^robots.txt$', 'project.core.views.robots_view'),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    url(r'^', include('favicon.urls')),
 
 
 ]
