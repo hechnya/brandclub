@@ -78,7 +78,7 @@
                             <input type="hidden" class="product_id" name="id" value="{{ product.id }}"/>
                             <input type="hidden" class="parametr_price" name="parametr_price" value="{{ parametr.price }}"/>
                             <i class="fa fa-chevron-down"></i> Кол-во: <input size="2" class="count" type="text" name="count" value="1" />
-                                <div class="btn btn-primary ajax-submit">
+                                <div class="btn btn-primary ajax-submit "onclick="yaCounter32411555.reachGoal('addcart'); return true;">
                                     <i class="mdi-action-add-shopping-cart "></i>
 {#                                    <input type="submit" class="hidden_style" value="Добавить" />#}
                                     Добавить
@@ -181,8 +181,8 @@
             var price = $(".option-selected").attr('data-value');
             var product_id = $(".product_id").val();
             var count = $(".count").val();
-            console.log(price);
-            console.log(product_id);
+{#            console.log(price);#}
+{#            console.log(product_id);#}
             $.post(
                 "/ajax-cart/",
                 {
@@ -194,7 +194,7 @@
                 onAjaxSuccess
             );
             function onAjaxSuccess(data) {
-                console.log(data);
+{#                console.log(data);#}
                 $("#complete-dialog .modal-body h2").html(data.product_name);
                 $("#complete-dialog .modal-body img").attr('src', data.product_image);
 {#                $("#complete-dialog .modal-body .description_confirm").html(data.description);#}
