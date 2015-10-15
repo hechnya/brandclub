@@ -165,9 +165,16 @@
 {#            themeClass         : '', /* Theme using external classes */#}
 {#            extendStyle        : true /* Copy all inline styles from original select */#}
         });
+{#        var test = $('select').comboSelect({});#}
+{#        $('select').change(function (e) {#}
+{#            var price = e.target.value;#}
+{#            $(this).parents(".product").children(".product_price").children("b").html(price);#}
+{#            $(this).parents(".product").children("form").children(".parametr_price").val(price);#}
+{#           console.log(e.target.value);#}
+{#        });#}
 
         $(".combo-dropdown li").on("click", function (){
-{#            alert("hello");#}
+            alert("hello");
             var price = $(this).attr('data-value');
             var product_id = $(".product_id").val();
             var count = $(".count").val();
