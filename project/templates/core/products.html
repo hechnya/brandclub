@@ -78,6 +78,10 @@
 		$(".fancybox").fancybox();
 
         $('select').comboSelect({});
+{#        $('select').change(function(event){#}
+{#            console.log(event.target.selectedIndex)#}
+{#            console.log(event.target.value)#}
+{#        });#}
 
         $(".combo-dropdown li").on("click", function (){
             var price = $(this).attr('data-value');
