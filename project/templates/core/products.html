@@ -77,20 +77,26 @@
 	$(document).ready(function() {
 		$(".fancybox").fancybox();
 
-        $('select').comboSelect({});
+        var test = $('select').comboSelect({});
+        $('select').change(function (e) {
+            var price = e.target.value;
+            $(this).parents(".product").children(".product_price").children("b").html(price);
+            $(this).parents(".product").children("form").children(".parametr_price").val(price);
+           console.log(e.target.value);
+        });
 {#        $('select').change(function(event){#}
 {#            console.log(event.target.selectedIndex)#}
 {#            console.log(event.target.value)#}
 {#        });#}
 
-        $(".combo-dropdown li").on("click", function (){
-            var price = $(this).attr('data-value');
+{#        $(".combo-dropdown li").on("click", function (){#}
+{#            var price = $(this).attr('data-value');#}
 {#            var test = $(this).parent(".product").children(".product_price b").html();#}
-            $(this).parents(".product").children(".product_price").children("b").html(price);
+{#            $(this).parents(".product").children(".product_price").children("b").html(price);#}
 {#            $(this).parents(".product").children(".parametr_price").val();#}
-            $(this).parents(".product").children("form").children(".parametr_price").val(price);
+{#            $(this).parents(".product").children("form").children(".parametr_price").val(price);#}
 {#            console.log(test);#}
-        });
+{#        });#}
 
 
         $(".ajax-submit").on("click", function(){
