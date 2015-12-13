@@ -267,3 +267,5 @@ def ajax_delivery(request):
         })
     return HttpResponse(data, content_type="application/json")
 
+
+

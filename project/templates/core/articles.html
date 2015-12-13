@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block head %}
+    {% if article.meta_title != "" %}
+        <title>{{ article.meta_title }} | аптека здоровья kastoreum.ru</title>
+    {% else %}
+        <title>{{ article.name }} | аптека здоровья kastoreum.ru</title>
+    {% endif %}
+    {% if article.meta_description != "" %}
+        <meta name="description" content="{{ article.meta_description }}"/>
+    {% else %}
+        <meta name="description" content="{{ article.text|truncatechars:160 }}"/>
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Статьи</h1>
+                {% if articles %}
+                    {% for article in articles %}
+                        <h2>{{ article.name }}</h2>
+{#                        <img src="/media/{{ article.image }}" width="200" height="auto" align="left" style="margin-right: 20px;" alt=""/>#}
+                        <p>{{ article.text|truncatewords:120|safe }}</p>
+                        <a class="btn-primary btn" href="{{ article.url }}">читать подробнее</a>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
