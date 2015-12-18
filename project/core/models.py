@@ -45,6 +45,9 @@ class Article(models.Model):
     def get_absolute_url(self):
         return '/article/%s/' % self.id
 
+    def get_image(self):
+        return ArticleImage.objects.filter(article=self.id)
+
 
 class Product(models.Model):
     name = models.CharField(max_length=150)
