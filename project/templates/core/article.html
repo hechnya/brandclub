@@ -20,11 +20,11 @@
     <div class="col-md-12">
         <div class="row">
             <div class="col-sm-12 col-xs-4 col-md-4 col-lg-3">
-                <img style="width: 100%"src="/media/{{ article.articleimage.url}}" alt=""/>
+                <img style="width: 100%"src="/media/{{ article.articleimage.id}}" alt=""/>
             </div>
             <div class="col-sm-12 col-xs-8 col-md-8 col-lg-9">
                 <h2>{{ article.name }} </h2>
-                <p> {{ article.text }} </p>
+                <p> {{ article.text|safe }} </p>
             </div>
 
         </div>
