@@ -103,6 +103,7 @@ def page_view(request, slug, template_name="core/page.html" ):
 def article_view(request, id, template_name="core/article.html"):
 
     article = Article.objects.get(id=id)
+    print article.get_image()[0].url
     try:
         article.articleimage = ArticleImage.objects.filter(article=article)[0]
     except:
