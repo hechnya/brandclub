@@ -177,6 +177,7 @@
 {#                                            <script type="text/javascript" charset="utf-8" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=r3Ph-Ao11UqZpy-gAnDUGJfKagQNPfns&width=600&height=450"></script>#}
                                         </div>
 {#    защита контента#}
+{% if not request.user.is_staff %}
     <script type="text/javascript">
         document.ondragstart = test;
         document.onselectstart = test;
@@ -185,7 +186,7 @@
             return false;
         }
         document.oncontextmenu;
-        function catchControlKeys(event){
+            function catchControlKeys(event){
             var code=event.keyCode ? event.keyCode : event.which ? event.which : null;
             if (event.ctrlKey){
                 // Ctrl+U
@@ -200,6 +201,9 @@
             }
         }
     </script>
+{#    -------------------------------------------#}
+{% endif %}
+
 {#    -------------------------------------------#}
                                     {% endblock  %}
                                 </div>
