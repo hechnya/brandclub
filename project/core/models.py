@@ -29,6 +29,7 @@ class Category(MPTTModel):
 
 class Article(models.Model):
     name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=150, unique=True, blank=False)
     text = RichTextField()
     date = models.DateField(auto_now_add=True)
 
@@ -43,7 +44,7 @@ class Article(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return '/article/%s/' % self.id
+        return '/articles/%s/' % self.slug
 
     def get_image(self):
         return ArticleImage.objects.filter(article=self.id)
@@ -125,6 +126,9 @@ class ArticleImage(models.Model):
 
     def __unicode__(self):
         return self.article.name
+
+    def get_absolute_url(self):
+        return '/media/%s/' % self.url
 
 
 class Page(models.Model):

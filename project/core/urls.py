@@ -10,7 +10,7 @@ urlpatterns = patterns('project.core.views',
     url(r'^$', 'indexView'),
     url(r'^product/(?P<slug>[-\w]+)/$', 'product_view'),
     url(r'^page/(?P<slug>[-\w]+)/$', 'page_view'),
-    url(r'^articles/(?P<id>[-\w]+)/$', 'article_view'),
+    url(r'^articles/(?P<slug>[-\w]+)/$', 'article_view'),
     # сделать вывод всех статей
     url(r'^articles/$', 'articles_view'),
     url(r'^category/(?P<slug>[-\w]+)/$', 'category_view'),

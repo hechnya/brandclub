@@ -177,29 +177,29 @@
 {#                                            <script type="text/javascript" charset="utf-8" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=r3Ph-Ao11UqZpy-gAnDUGJfKagQNPfns&width=600&height=450"></script>#}
                                         </div>
 {#    защита контента#}
-    <script type="text/javascript">
-        document.ondragstart = test;
-        document.onselectstart = test;
-        document.oncontextmenu = test;
-        function test() {
-            return false;
-        }
-        document.oncontextmenu;
-        function catchControlKeys(event){
-            var code=event.keyCode ? event.keyCode : event.which ? event.which : null;
-            if (event.ctrlKey){
-                // Ctrl+U
-                if (code == 117) return false;
-                if (code == 85) return false;
-                // Ctrl+C
-                if (code == 99) return false;
-                if (code == 67) return false;
-                // Ctrl+A
-                if (code == 97) return false;
-                if (code == 65) return false;
-            }
-        }
-    </script>
+{#    <script type="text/javascript">#}
+{#        document.ondragstart = test;#}
+{#        document.onselectstart = test;#}
+{#        document.oncontextmenu = test;#}
+{#        function test() {#}
+{#            return false;#}
+{#        }#}
+{#        document.oncontextmenu;#}
+{#        function catchControlKeys(event){#}
+{#            var code=event.keyCode ? event.keyCode : event.which ? event.which : null;#}
+{#            if (event.ctrlKey){#}
+{#                // Ctrl+U#}
+{#                if (code == 117) return false;#}
+{#                if (code == 85) return false;#}
+{#                // Ctrl+C#}
+{#                if (code == 99) return false;#}
+{#                if (code == 67) return false;#}
+{#                // Ctrl+A#}
+{#                if (code == 97) return false;#}
+{#                if (code == 65) return false;#}
+{#            }#}
+{#        }#}
+{#    </script>#}
 {#    -------------------------------------------#}
                                     {% endblock  %}
                                 </div>

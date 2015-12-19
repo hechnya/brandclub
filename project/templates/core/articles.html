@@ -26,7 +26,7 @@
                         <h3>{{ article.name }}</h3>
 {#                        <img src="/media/{{ article.image }}" width="200" height="auto" align="left" style="margin-right: 20px;" alt=""/>#}
                         <p>{{ article.text|truncatewords:120|safe }}</p>
-                        <a class="btn-primary btn" href="{{ article.id }}">читать подробнее</a>
+                        <a class="btn-primary btn" href="{{ article.get_absolute_url }}">читать подробнее</a>
                     {% endfor %}
                 {% endif %}
             </div>

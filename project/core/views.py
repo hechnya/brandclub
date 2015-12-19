@@ -100,10 +100,9 @@ def page_view(request, slug, template_name="core/page.html" ):
     return render_to_response(template_name, locals(), context_instance=RequestContext(request))
 
 
-def article_view(request, id, template_name="core/article.html"):
+def article_view(request, slug, template_name="core/article.html"):
 
-    article = Article.objects.get(id=id)
-    print article.get_image()[0].url
+    article = Article.objects.get(slug=slug)
     try:
         article.articleimage = ArticleImage.objects.filter(article=article)[0]
     except:
