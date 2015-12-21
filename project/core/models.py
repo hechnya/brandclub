@@ -128,7 +128,7 @@ class ArticleImage(models.Model):
         return self.article.name
 
     def get_absolute_url(self):
-        return '/media/%s/' % self.url
+        return '/media/%s' % self.url
 
 
 class Page(models.Model):
