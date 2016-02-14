@@ -10,7 +10,7 @@ class AccountForm(ModelForm):
         super(AccountForm, self).__init__(*args, **kwargs)
         self.fields['email'].widget.attrs = {'placeholder':'Ваш email', 'class':'form-control'}
         self.fields['username'].widget.attrs = {'placeholder':'Имя пользователя', 'class':'form-control'}
-        self.fields['password'].widget.attrs = {'placeholder':'Ваш пароль', 'class':'form-control'}
+        self.fields['password'].widget.attrs = {'placeholder':'Придумайте пароль', 'class':'form-control'}
         self.fields['first_name'].widget.attrs = {'placeholder':'Ваше Имя', 'class':'form-control'}
         self.fields['last_name'].widget.attrs = {'placeholder':'Ваша Фамилия', 'class':'form-control'}
         self.fields['zip'].widget.attrs = {'placeholder':'Индекс', 'class':'form-control'}
