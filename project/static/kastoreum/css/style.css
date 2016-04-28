@@ -1,7 +1,14 @@
 @import url("animate.css");
 
 /*/мои стили/*/
+.super-body .navbar-toggle {
+    float: none;
+}
 
+.cart_menu.mobile-cart {
+    float: right;
+    padding: 4px;
+}
 .content-wrapper a {
     color: #009963;
 }
@@ -324,4 +331,13 @@ button.close:hover {
 .namber_footer p{
     color: #000000;
 }
-
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .sitebar-top .cart_menu{
+        display: none;
+    }
+}
+@media only screen and (min-device-width : 481px){
+    .cart_menu.mobile-cart{
+        display: none;
+    }
+}
