@@ -166,6 +166,12 @@ def confirmation_view(request, template_name="cart/confirmation.html"):
                    })
 
             order.save()
+            subject = u'заявка от %s' % order.user.first_name
+            message = u'Номер заказа: %s \n Имя: %s \n телефон: %s' % (order.id, order.user.last_name, order.user.phone)
+            send_mail(subject, message, 'halturin77@gmail.com', [ADMIN_EMAIL], fail_silently=False)
+            # subject = u'Пользователь не оплатил %s' % order.user.first_name
+            # message = u'Номер заказа: %s \n Имя: %s \n телефон: %s' % (order.id, order.user.last_name, order.user.phone)
+            # send_mail(subject, message, 'halturin77@gmail.com', [ADMIN_EMAIL], fail_silently=False)
         # else:
         #     if request.method == 'POST' and "mail" in request.POST:
         #         cart_id = request.POST['cart_id']
