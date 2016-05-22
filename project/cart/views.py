@@ -4,6 +4,7 @@ from project.cart.models import CartItem, Order, CartInfoHelper, Delivery
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user
 from project.cart import cart, delivery
 from authentication.models import Account
 from django.contrib.auth import login, logout
@@ -83,7 +84,7 @@ def cart_view(request, template_name="cart/cart.html"):
                 user.save()
 
         order = Order()
-        order.user = user
+        order.user = get_user(request)
         order.cart_id = cart_id
         order.save()
 
